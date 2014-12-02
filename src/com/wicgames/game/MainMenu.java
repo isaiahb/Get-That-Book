@@ -13,9 +13,7 @@ import com.wicgames.scene.Scene;
 import com.wicgames.wicLibrary.Vector2;
 
 public class MainMenu extends Scene {
-	JButton play;
-	public MainMenu(Vector2 size, Vector2 camera) {
-		super(size, camera);
+	public MainMenu() {
 		Main.panel.setLayout(new GridBagLayout());
 	}
 
@@ -30,6 +28,6 @@ public class MainMenu extends Scene {
 	}
 	
 	public void init(){
-		Main.panel.add(play,Main.getConstraints(2, 2, 2, 1));
+		//Main.panel.add(play,Main.getConstraints(2, 2, 2, 1));
 	}
 }

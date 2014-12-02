@@ -1,30 +1,29 @@
 package com.wicgames.window;
 
-import com.wicgames.game.Main;
-import com.wicgames.scene.Scene;
-import com.wicgames.scene.SplashScreen;
-import com.wicgames.wicLibrary.Vector2;
-
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.wicgames.game.Main;
+
 public class Panel extends JPanel implements Runnable{
 	private boolean running = false;
 	public Panel(JFrame frame) {
 		setFocusable(true);
+		this.setPreferredSize(frame.getSize());
 		this.requestFocusInWindow();
 		frame.add(this);
 		frame.setVisible(true);
+		frame.pack();
 		Thread loop = new Thread(this);
 		loop.start();
 	}
 	
 	public void start() {
 		running = true;
-		Scene.currentScene = new SplashScreen(new Vector2(getWidth(),getHeight()), new Vector2(), "bin/WIC.png",2);
 	}	
 	public void run(){
 		long last = System.nanoTime();
@@ -45,7 +44,9 @@ public class Panel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponents(g);
 		Graphics2D graphics2D = (Graphics2D) g;
-		graphics2D.drawRect(0, 0, getWidth(), getHeight());
+		graphics2D.setColor(Color.WHITE);
+		//System.out.println(g);
+		graphics2D.fillRect(0, 0, getWidth(), getHeight());
 		Main.draw(graphics2D);
 	}
 }

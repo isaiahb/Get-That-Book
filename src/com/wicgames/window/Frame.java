@@ -1,5 +1,6 @@
 package com.wicgames.window;
 
+import java.awt.Insets;
 import java.io.File;
 import java.io.IOException;
 
@@ -12,7 +13,8 @@ public class Frame extends JFrame {
 		setSize(width, height);
 		setTitle(title);
 		try {
-			setIconImage(ImageIO.read(new File("bin/WIC64.png")));
+			System.out.println(new File("bin/assets/textures/WIC64.png").getAbsolutePath());
+			setIconImage(ImageIO.read(new File("bin/assets/textures/WIC64.png")));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

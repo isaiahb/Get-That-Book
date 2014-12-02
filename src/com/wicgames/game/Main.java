@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 
 import com.wicgames.scene.Scene;
+import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Frame;
 import com.wicgames.window.Panel;
 
@@ -18,6 +19,8 @@ public class Main {
 	public static void main(String[] args) {
 		//Main Method
 		panel.start();
+		Scene.currentScene = new SplashScreen();
+
 	}
 	
 	public static void update(double delta) {

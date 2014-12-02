@@ -7,20 +7,13 @@ import com.wicgames.gameObjects.GameObject;
 import com.wicgames.wicLibrary.Vector2;
 
 public abstract class Scene {
-	public Vector2 camera;
-	public Vector2 size;
+	public Vector2 camera = new Vector2();
+	public Vector2 size = new Vector2();
 	public static Scene currentScene;
 	public ArrayList<GameObject> objects = new ArrayList<GameObject>();
 
-	public Scene(Vector2 size, Vector2 camera) {
-		this.size = size;
-		this.camera = camera;
-	}
-
 	public abstract void draw(Graphics g);
-
 	public abstract void update(double delta);
-
 	public abstract void init();
 	
 	public static void updateScene(double delta) {

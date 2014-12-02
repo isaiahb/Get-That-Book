@@ -1,4 +1,4 @@
-package com.wicgames.scene;
+package com.wicgames.game;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -7,20 +7,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.wicgames.game.MainMenu;
+import com.wicgames.scene.Scene;
 import com.wicgames.wicLibrary.Vector2;
 
 public class SplashScreen extends Scene {
 	public Image splash;
 	private double timeElapsed;
-	private long showTime;
-	private Scene nextScene;
-	public SplashScreen(Vector2 size, Vector2 camera, String splashPath,long showTime) {
-		super(size, camera);
-		this.showTime = showTime;
-		nextScene = new MainMenu(size,camera);
+	private double showTime = 2;
+	public SplashScreen() {
 		try {
-			splash = ImageIO.read(new File(splashPath));
+			splash = ImageIO.read(new File("bin/assets/textures/WIC.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -28,14 +24,15 @@ public class SplashScreen extends Scene {
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(splash,(int) size.x / 2 - splash.getWidth(null) / 2,(int) size.y / 2 - splash.getHeight(null) / 2, null);
+		g.drawImage(splash, 0,0, (int)Main.panel.getWidth(), (int)Main.panel.getHeight(), null);
 	}
 
 	@Override
 	public void update(double delta) {
 		timeElapsed += delta;
-		if(timeElapsed > showTime){
-			currentScene = nextScene;
+		if(timeElapsed >= showTime){
+			System.out.println("Moving to next scene");
+			currentScene = new MainMenu();;
 			currentScene.init();
 		}
 	}
