@@ -8,7 +8,7 @@ import com.wicgames.wicLibrary.Vector2;
 public class Mouse implements MouseListener {
 	public static boolean Button1Down = false;
 	public static boolean Button2Down = false;
-	public static Vector2 poition = new Vector2();
+	public static Vector2 position = new Vector2();
 	
     @Override
     public void mouseClicked(MouseEvent e){}

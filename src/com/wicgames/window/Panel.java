@@ -8,24 +8,27 @@ import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Panel extends JPanel {
-	private Thread thread;
+public class Panel extends JPanel implements Runnable{
 	private boolean running = false;
 	public Panel(JFrame frame) {
 		setFocusable(true);
 		this.requestFocusInWindow();
 		frame.add(this);
 		frame.setVisible(true);
+		Thread loop = new Thread(this);
+		loop.start();
 	}
 	
 	public void start() {
 		running = true;
+	}	
+	public void run(){
 		long last = System.nanoTime();
 		double delta;
 		while (running) {
 			double timeTaken = (double)(System.nanoTime() - last);
 			last = System.nanoTime();
-			delta = timeTaken/1000000000.00 ;
+			delta = timeTaken/1000000000.00;
 			Main.update(delta);
 			repaint();
 			try {
@@ -33,7 +36,7 @@ public class Panel extends JPanel {
 			} 
 			catch (Exception e) {}	
 		}
-	}	
+	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
