@@ -2,6 +2,7 @@ package com.wicgames.game;
 
 import java.awt.Graphics2D;
 
+import com.wicgames.scene.Scene;
 import com.wicgames.window.Frame;
 import com.wicgames.window.Panel;
 
@@ -19,10 +20,10 @@ public class Main {
 	}
 	
 	public static void update(double delta) {
-		System.out.println(delta);
+		Scene.updateScene(delta);
 	}
 	public static void draw(Graphics2D graphics2D) {
-		
+		Scene.drawScene(graphics2D);
 	}
 
 }

@@ -1,6 +1,9 @@
 package com.wicgames.window;
 
 import com.wicgames.game.Main;
+import com.wicgames.scene.Scene;
+import com.wicgames.scene.SplashScreen;
+import com.wicgames.wicLibrary.Vector2;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -21,6 +24,7 @@ public class Panel extends JPanel implements Runnable{
 	
 	public void start() {
 		running = true;
+		Scene.currentScene = new SplashScreen(new Vector2(getWidth(),getHeight()), new Vector2(), "bin/WIC.png",2);
 	}	
 	public void run(){
 		long last = System.nanoTime();
