@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.wicgames.game.MainMenu;
 import com.wicgames.wicLibrary.Vector2;
 
 public class SplashScreen extends Scene {
@@ -17,6 +18,7 @@ public class SplashScreen extends Scene {
 	public SplashScreen(Vector2 size, Vector2 camera, String splashPath,long showTime) {
 		super(size, camera);
 		this.showTime = showTime;
+		nextScene = new MainMenu(size,camera);
 		try {
 			splash = ImageIO.read(new File(splashPath));
 		} catch (IOException e) {
@@ -34,7 +36,13 @@ public class SplashScreen extends Scene {
 		timeElapsed += delta;
 		if(timeElapsed > showTime){
 			currentScene = nextScene;
+			currentScene.init();
 		}
+	}
+
+	@Override
+	public void init() {
+		
 	}
 	
 }

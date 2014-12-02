@@ -43,7 +43,7 @@ public class Panel extends JPanel implements Runnable{
 	}
 	
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+		super.paintComponents(g);
 		Graphics2D graphics2D = (Graphics2D) g;
 		graphics2D.drawRect(0, 0, getWidth(), getHeight());
 		Main.draw(graphics2D);

@@ -21,6 +21,8 @@ public abstract class Scene {
 
 	public abstract void update(double delta);
 
+	public abstract void init();
+	
 	public static void updateScene(double delta) {
 		if (currentScene != null) {
 			currentScene.update(delta);
