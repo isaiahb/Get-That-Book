@@ -1,7 +1,10 @@
 package com.wicgames.game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -10,9 +13,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import com.wicgames.scene.Scene;
-import com.wicgames.wicLibrary.Vector2;
 
 public class MainMenu extends Scene {
+	//Button play;
+	JButton play;
 	public MainMenu() {
 		Main.panel.setLayout(new GridBagLayout());
 	}
@@ -28,6 +32,22 @@ public class MainMenu extends Scene {
 	}
 	
 	public void init(){
-		//Main.panel.add(play,Main.getConstraints(2, 2, 2, 1));
+		play = new JButton();
+		play.setBackground(new Color(0,0,0,0));
+		play.setBorder(null);
+		
+		try {
+			play.setIcon(new ImageIcon(ImageIO.read(new File("bin/assets/textures/PlayButton24.png"))));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		play.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Clicked");
+			}
+		});
+		Main.panel.add(play,Main.getConstraints(2, 2, 2, 1));
+		Main.frame.pack();
 	}
 }
