@@ -1,6 +1,7 @@
 package com.wicgames.mobs;
 
 public class BasicMob {
-    int health;
-    int armour;
+    public int health;
+    public int armour;
+    public int damageBoost;
 }
