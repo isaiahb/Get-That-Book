@@ -41,7 +41,7 @@ public class Menu extends Scene {
 		Main.panel.add(play);
 		Main.frame.pack();
 		Scene.currentScene.drawables.add((Drawable) play);
-		level = new Button("bin/assets/textures/PlayButton24.png", new Vector2(Main.WIDTH / 2, Main.HEIGHT / 2 + 100));
+		level = new Button("bin/assets/textures/LEVEL.png", new Vector2(Main.WIDTH / 2, Main.HEIGHT / 2 + 100));
 		level.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
