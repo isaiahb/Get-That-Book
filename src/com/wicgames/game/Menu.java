@@ -13,7 +13,6 @@ import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Button;
 
 public class Menu extends Scene {
-	//Button play;
 	JButton play;
 	public Menu() {
 		Main.panel.setLayout(null);
