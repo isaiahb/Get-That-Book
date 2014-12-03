@@ -2,7 +2,6 @@ package com.wicgames.window;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -18,13 +17,14 @@ public class Button extends JButton implements Drawable{
 	public Image texture;
 	public Vector2 position;
 	public Button() {
+		this.position = new Vector2();
 		setBackground(new Color(0,0,0,0));
 		setBorder(null);
 	}
-	public Button(String path,Vector2 position) {
+	public Button(String path, int x, int y) {
 		setBackground(new Color(0,0,0,0));
 		setBorder(null);
-		this.position = position;
+		this.position = new Vector2(x,y);
 		try {
 			texture = (ImageIO.read(new File(path)));
 		} catch (IOException e) {
@@ -33,10 +33,10 @@ public class Button extends JButton implements Drawable{
 		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
 		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);
 	}
-	public Button(Image texture, Vector2 position){
+	public Button(Image texture, int x, int y){
 		setBackground(new Color(0,0,0,0));
 		setBorder(null);
-		this.position = position;
+		this.position = new Vector2(x, y);
 		this.texture = texture;
 		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
 		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);

@@ -1,19 +1,13 @@
 package com.wicgames.game;
 
 import java.awt.Graphics2D;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 
 import com.wicgames.scene.Scene;
 import com.wicgames.wicLibrary.Drawable;
-import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Button;
 
 public class Menu extends Scene {
-	JButton play, level;
+	Button play, level;
 
 	public Menu() {
 		Main.panel.setLayout(null);
@@ -28,10 +22,8 @@ public class Menu extends Scene {
 	public void update(double delta) {
 
 	}
-
 	public void init() {
-		play = new Button("bin/assets/textures/PlayButton24.png", new Vector2(
-				Main.WIDTH / 2, Main.HEIGHT / 2));
+		play = new Button("bin/assets/textures/PlayButton24.png", (int)Main.HALF.x, (int)Main.HALF.y);
 		play.addActionListener((e) -> {
 			System.out.println("Clicked");
 			Scene.currentScene = new LevelMenu();
@@ -40,8 +32,7 @@ public class Menu extends Scene {
 		Main.panel.add(play);
 		Main.frame.pack();
 		Scene.currentScene.drawables.add((Drawable) play);
-		level = new Button("bin/assets/textures/LEVEL.png", new Vector2(
-				Main.WIDTH / 2, Main.HEIGHT / 2 + 100));
+		level = new Button("bin/assets/textures/LEVEL.png", (int)Main.HALF.x, (int)Main.HALF.y + 50);
 		level.addActionListener((e) -> {
 			System.out.println("Clicked");
 			Scene.currentScene = new LevelMenu();

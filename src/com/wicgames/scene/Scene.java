@@ -16,8 +16,10 @@ public abstract class Scene {
 	public static Scene currentScene;
 	public Vector2 camera = new Vector2();
 	public Vector2 size = new Vector2();
+	public ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	public ArrayList<Drawable> drawables = new ArrayList<Drawable>();
 	public ArrayList<Body> bodies = new ArrayList<Body>();
+	
 	public Scene() {
 		if (Scene.currentScene != null)
 			Scene.currentScene.destroy();
