@@ -24,8 +24,10 @@ public class LevelMenu extends Scene{
 		for(int x = 0;x < levelButtons.length;x++){
 			for(int y = 0;y < levelButtons[x].length;y++){
 				levelNum++;
-				System.out.println(levelNum);
-				levelButtons[x][y] = new Button(buttons.getImage(1 + ((levelNum - 1)* 2), 0),new Vector2(100 + x * 32,100 +y * 32));
+				if(levelNum <= Integer.parseInt(Data.save.getValue("curLevel")))
+					levelButtons[x][y] = new Button(buttons.getImage(1 + ((levelNum - 1)* 2), 0),new Vector2(100 + x * 32,100 +y * 32));
+				else
+					levelButtons[x][y] = new Button(buttons.getImage(((levelNum - 1)* 2), 0),new Vector2(100 + x * 32,100 +y * 32));
 				Main.panel.add(levelButtons[x][y]);
 				Scene.currentScene.drawables.add((Drawable) levelButtons[x][y]);
 			}

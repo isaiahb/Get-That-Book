@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class Data {
 	public static Data config;
-	public static Data save;
+	public static Data save = new Data("bin/assets/data/save/save");
 	private ArrayList<keypair> data;
-	private Data(String path) throws IOException{
+	private Data(String path){
 		data = new ArrayList<keypair>();
 		BufferedReader dataFile = null;
 		try {
@@ -19,10 +19,20 @@ public class Data {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		while(dataFile.ready()){
-			String[] entry = dataFile.readLine().split(":");
-			data.add(new keypair(entry[0],entry[1]));
+		try {
+			while(dataFile.ready()){
+				String[] entry = dataFile.readLine().split(":");
+				data.add(new keypair(entry[0],entry[1]));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+	}
+	public String getValue(String key){
+		for(keypair k : data)
+			if(k.name.equals(key))
+				return k.value;
+		return "Unknown keypair";
 	}
 	private class keypair{
 		public String name;
