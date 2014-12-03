@@ -13,7 +13,7 @@ public class Main {
 	public static final int FPS = 60;
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 360;
-	public static int scale = 1;
+	public static int scale = 2;
 	public static Frame frame = new Frame(WIDTH*scale, HEIGHT*scale, title);
 	public static Panel panel = new Panel(frame);
 	public static void main(String[] args) {
