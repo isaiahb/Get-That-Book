@@ -34,7 +34,7 @@ public class SplashScreen extends Scene {
 		timeElapsed += delta;
 		if(timeElapsed >= showTime){
 			System.out.println("Moving to next scene");
-			currentScene = new Menu();;
+			currentScene = new Menu();
 			currentScene.init();
 		}
 	}

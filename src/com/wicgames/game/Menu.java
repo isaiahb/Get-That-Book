@@ -34,7 +34,8 @@ public class Menu extends Scene {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Clicked");
-				Scene.currentScene = new Level1();
+				Scene.currentScene = new LevelMenu();
+				Scene.currentScene.init();
 			}
 		});
 		Main.panel.add(play);
