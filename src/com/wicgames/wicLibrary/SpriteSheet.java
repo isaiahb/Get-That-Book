@@ -14,14 +14,16 @@ public class SpriteSheet {
 	private Vector2 numSprites;
 	private BufferedImage sheet;
 	private BufferedImage[][] sprites;
-	public SpriteSheet(String path,int x,int y){
+	private int borderSize;
+	public SpriteSheet(String path,int x,int y, int borderSize){
 		spriteSize = new Vector2(x,y);
 		try {
 			sheet = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		numSprites = new Vector2(sheet.getWidth(null) / spriteSize.x, sheet.getHeight(null) / spriteSize.y);
+		this.borderSize = borderSize;
+		numSprites = new Vector2(sheet.getWidth(null) / spriteSize.x + borderSize, sheet.getHeight(null) / spriteSize.y + borderSize);
 		sprites = new BufferedImage[x][y];
 		loadSprites();
 	}
@@ -30,16 +32,15 @@ public class SpriteSheet {
 		Vector2 spritePosition = new Vector2(x * spriteSize.x,y * spriteSize.y);
 		BufferedImage sprite = (BufferedImage) Main.frame.createImage((int)spriteSize.x,(int)spriteSize.y);
 		for(int xPos = 0;xPos < spriteSize.x;xPos++)
-			for(int yPos = 0;yPos < spriteSize.y;yPos++){
-				sprite.setRGB(xPos, yPos, sheet.getRGB((int)(xPos + spritePosition.x),(int)(yPos + spritePosition.y)));
-			}
+			for(int yPos = 0;yPos < spriteSize.y;yPos++)
+				sprite.setRGB(xPos, yPos, sheet.getRGB((int)(xPos + spritePosition.x + x*borderSize),(int)(yPos + spritePosition.y + y*borderSize)));
 		return sprite;
 	}
 	private void loadSprites(){
 		for(int x = 0;x < numSprites.x;x++)
-			for(int y = 0;y < numSprites.y;y++){
+			for(int y = 0;y < numSprites.y;y++)
 				sprites[x][y] = getSprite(x,y);
-			}
+		sheet = null;
 	}
 	public Image getImage(int x,int y){return sprites[x][y];}
 }

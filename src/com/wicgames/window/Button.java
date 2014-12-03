@@ -33,6 +33,14 @@ public class Button extends JButton implements Drawable{
 		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
 		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);
 	}
+	public Button(Image texture, Vector2 position){
+		setBackground(new Color(0,0,0,0));
+		setBorder(null);
+		this.position = position;
+		this.texture = texture;
+		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
+		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);
+	}
 	public void paint(Graphics g){}
 	public void paintComponent(Graphics g){}
 	public void draw(Graphics g){
