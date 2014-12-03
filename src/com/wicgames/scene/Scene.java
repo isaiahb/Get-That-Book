@@ -1,36 +1,40 @@
 package com.wicgames.scene;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import com.wicgames.game.Main;
 import com.wicgames.gameObjects.GameObject;
+import com.wicgames.physics.Body;
+import com.wicgames.physics.CollisionDetection;
+import com.wicgames.physics.CollisionResolution;
+import com.wicgames.physics.Manifold;
 import com.wicgames.wicLibrary.Vector2;
 
 public abstract class Scene {
+	public static Scene currentScene;
 	public Vector2 camera = new Vector2();
 	public Vector2 size = new Vector2();
-	public static Scene currentScene;
 	public ArrayList<GameObject> objects = new ArrayList<GameObject>();
+	public ArrayList<Body> bodies = new ArrayList<Body>();
+	public Scene() {
+		if (Scene.currentScene != null)
+			Scene.currentScene.destroy();
+	}
+	public void update(double delta) {
+		Manifold.clearManifolds();
+		Body.update(bodies, delta);
+		//Constraint.update(constraints);
 
-	public abstract void draw(Graphics g);
-	public abstract void update(double delta);
-	public abstract void init();
-	
-	public static void updateScene(double delta) {
-		if (currentScene != null) {
-			currentScene.update(delta);
-			for (int i = 0; i < currentScene.objects.size(); i++) {
-				// currentScene.objects.get(i);
-			}
-		}
+		CollisionDetection.BroadPhase(bodies);
+		CollisionResolution.update(Manifold.all);
 	}
 
-	public static void drawScene(Graphics g) {
-		if (currentScene != null) {
-			currentScene.draw(g);
-			for (int i = 0; i < currentScene.objects.size(); i++) {
-				currentScene.objects.get(i).draw(g);
-			}
-		}
+	public void draw(Graphics2D graphics2D) {
+		GameObject.draw(graphics2D, objects);
+	}
+	public abstract void init();
+	public void destroy() {
+		Main.panel.removeAll();
 	}
 }

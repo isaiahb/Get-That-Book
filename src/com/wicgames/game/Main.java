@@ -24,10 +24,12 @@ public class Main {
 	}
 	
 	public static void update(double delta) {
-		Scene.updateScene(delta);
+		if (Scene.currentScene != null)
+			Scene.currentScene.update(delta);
 	}
 	public static void draw(Graphics2D graphics2D) {
-		Scene.drawScene(graphics2D);
+		if (Scene.currentScene != null)
+			Scene.currentScene.draw(graphics2D);
 	}
 	
     public static GridBagConstraints getConstraints(int x,int y,int width,int height){

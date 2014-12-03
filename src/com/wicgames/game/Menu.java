@@ -1,6 +1,6 @@
 package com.wicgames.game;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,15 +10,15 @@ import javax.swing.JButton;
 import com.wicgames.scene.Scene;
 import com.wicgames.window.Button;
 
-public class MainMenu extends Scene {
+public class Menu extends Scene {
 	//Button play;
 	JButton play;
-	public MainMenu() {
+	public Menu() {
 		Main.panel.setLayout(new GridBagLayout());
 	}
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics2D graphics2D) {
 
 	}
 
@@ -33,9 +33,11 @@ public class MainMenu extends Scene {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Clicked");
+				Scene.currentScene = new Level1();
 			}
 		});
 		Main.panel.add(play,Main.getConstraints(2, 2, 2, 1));
 		Main.frame.pack();
 	}
+
 }
