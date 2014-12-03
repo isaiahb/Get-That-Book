@@ -13,7 +13,7 @@ import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Button;
 
 public class Menu extends Scene {
-	JButton play;
+	JButton play, level;
 	public Menu() {
 		Main.panel.setLayout(null);
 	}
@@ -41,6 +41,18 @@ public class Menu extends Scene {
 		Main.panel.add(play);
 		Main.frame.pack();
 		Scene.currentScene.drawables.add((Drawable) play);
+		level = new Button("bin/assets/textures/PlayButton24.png", new Vector2(Main.WIDTH / 2, Main.HEIGHT / 2 + 100));
+		level.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Clicked");
+				Scene.currentScene = new LevelMenu();
+				Scene.currentScene.init();
+			}
+		});
+		Main.panel.add(level);
+		Main.frame.pack();
+		Scene.currentScene.drawables.add((Drawable) level);
 	}
 
 }
