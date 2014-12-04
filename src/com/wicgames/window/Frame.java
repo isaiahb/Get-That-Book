@@ -1,6 +1,5 @@
 package com.wicgames.window;
 
-import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
 

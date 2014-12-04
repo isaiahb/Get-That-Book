@@ -1,7 +1,6 @@
 package com.wicgames.mobs;
 
-public class Character extends BasicMob{
-    BasicMob basicMob = new BasicMob();
+public class Character extends Mob {
     public Character(){
         health = 100;
         armour = 10;

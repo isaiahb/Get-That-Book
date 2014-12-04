@@ -2,6 +2,7 @@ package com.wicgames.window;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -43,7 +44,8 @@ public class Button extends JButton implements Drawable{
 	}
 	public void paint(Graphics g){}
 	public void paintComponent(Graphics g){}
-	public void draw(Graphics g){
+	public void draw(Graphics2D g){
 		g.drawImage(texture,(int)position.x,(int)position.y,null);
 	}
+
 }
