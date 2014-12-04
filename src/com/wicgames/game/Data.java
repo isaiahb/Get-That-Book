@@ -13,7 +13,7 @@ public class Data {
 	public static Data config;
 	public static Data save = new Data("bin/assets/data/save/save");
 	private ArrayList<keypair> data;
-	private Data(String path){
+	public Data(String path){
 		data = new ArrayList<keypair>();
 		BufferedReader dataFile = null;
 		try {

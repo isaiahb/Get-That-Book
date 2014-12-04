@@ -1,5 +1,6 @@
 package com.wicgames.gameObjects;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
@@ -22,10 +23,13 @@ public abstract class GameObject implements Drawable {
 		//TO DO - finish this method
 		//Will be used to draw the game object
 		if (texture != null)
-			;
-		else
+			graphics2D.drawImage(texture,(int)body.position.x,(int)body.position.y,null);
+		else{
+			graphics2D.setColor(Color.PINK);
 	        graphics2D.fillRect((int)body.position.x,(int)body.position.y,(int)body.size.x, (int) body.size.y);
-
+	        graphics2D.setColor(Color.BLACK);
+	        graphics2D.drawRect((int)body.position.x,(int)body.position.y,(int)body.size.x, (int) body.size.y);
+		}
 	}
 	
 }

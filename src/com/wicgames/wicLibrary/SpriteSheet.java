@@ -34,6 +34,9 @@ public class SpriteSheet {
 		sprites = new BufferedImage[x][y];
 		loadSprites();
 	}
+	public Vector2 getNumSprites() {
+		return numSprites.copy();
+	}
 	/**
 	 * Gets sprite at x,y from sprite sheet
 	 * @param x X Position of sprite
@@ -42,11 +45,12 @@ public class SpriteSheet {
 	 * 
 	 */
 	private BufferedImage getSprite(int x, int y){
-		if(x > numSprites.x || y > numSprites.y) throw new ArrayIndexOutOfBoundsException();
-		Vector2 spritePosition = new Vector2(x * spriteSize.x,y * spriteSize.y);
-		BufferedImage sprite = (BufferedImage) Main.frame.createImage((int)spriteSize.x,(int)spriteSize.y);
-		for(int xPos = 0;xPos < spriteSize.x;xPos++)
+		if(x > numSprites.x || y > numSprites.y) throw new ArrayIndexOutOfBoundsException(); //Trying to get sprite outside of sprite sheet
+		Vector2 spritePosition = new Vector2(x * spriteSize.x,y * spriteSize.y); //Gets position of sprite on sprite sheet
+		BufferedImage sprite = (BufferedImage) Main.frame.createImage((int)spriteSize.x,(int)spriteSize.y); //Creates new image to hold sprite
+		for(int xPos = 0;xPos < spriteSize.x;xPos++) 
 			for(int yPos = 0;yPos < spriteSize.y;yPos++){
+				//Copy's Pixels from sprite sheet to sprite image
 				sprite.setRGB(xPos, yPos, sheet.getRGB((int)(xPos + spritePosition.x + x*borderSize),(int)(yPos + spritePosition.y + y*borderSize)));
 			}
 		return sprite;
@@ -57,12 +61,13 @@ public class SpriteSheet {
 	private void loadSprites(){
 		for(int x = 0;x < numSprites.x;x++)
 			for(int y = 0;y < numSprites.y;y++){
-				sprites[x][y] = getSprite(x,y);
+				sprites[x][y] = getSprite(x,y); //Takes sprite from sprite sheet
 			}
-		sheet = null;
+		sheet = null; //Removes reference to sprite sheet
 	}
 	/**
 	 * Gets image from sprite array
 	 */
-	public Image getImage(int x,int y){return sprites[x][y];}
+	public Image getImage(int x,int y){return sprites[x][y];} //Gets sprite in array at x and y
+	public Image getImage(int i){return sprites[(int) (i % numSprites.x)][(int) (i / numSprites.x)];} //Gets i th sprite in array
 }

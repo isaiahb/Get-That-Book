@@ -16,13 +16,14 @@ public class Frame extends JFrame {
 		setSize(width, height);
 		setTitle(title);
 		try {
-			System.out.println(new File("bin/assets/textures/WIC64.png").getAbsolutePath());
-			setIconImage(ImageIO.read(new File("bin/assets/textures/WIC64.png")));
+			setIconImage(ImageIO.read(new File("bin/assets/textures/WIC64.png"))); //Sets icon for frame
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		/**
+		 * Adds window listener to save files when window is closed
+		 */
 		addWindowListener(new WindowAdapter() {
-
 			@Override
 			public void windowClosing(WindowEvent e) {
 				try {

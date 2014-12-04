@@ -1,11 +1,8 @@
 package com.wicgames.game;
 
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.util.function.BinaryOperator;
 
 import com.wicgames.scene.Scene;
-import com.wicgames.wicLibrary.Function;
 import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Frame;
 import com.wicgames.window.Panel;
@@ -37,12 +34,4 @@ public class Main {
 			Scene.currentScene.draw(graphics2D);
 	}
 	
-    public static GridBagConstraints getConstraints(int x,int y,int width,int height){
-    	GridBagConstraints c = new GridBagConstraints();
-    	c.gridx = x;
-    	c.gridy = y;
-    	c.gridwidth = width;
-    	c.gridheight = height;
-        return c;
-    }
 }

@@ -34,7 +34,6 @@ public class Menu extends Scene {
 		Scene.currentScene.drawables.add((Drawable) play);
 		level = new Button("bin/assets/textures/LEVEL.png", (int)Main.HALF.x, (int)Main.HALF.y + 50);
 		level.addActionListener((e) -> {
-			System.out.println("Clicked");
 			Scene.currentScene = new LevelMenu();
 			Scene.currentScene.init();
 		});

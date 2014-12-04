@@ -27,8 +27,8 @@ public class SplashScreen extends Scene {
 
 	@Override
 	public void update(double delta) {
-		timeElapsed += delta;
-		if(timeElapsed >= showTime){
+		timeElapsed += delta; //Adds delta to time elapsed
+		if(timeElapsed >= showTime){//If scene has been open longer than the time it is supposed to be showed move to menu screen
 			System.out.println("Moving to next scene");
 			currentScene = new Menu();
 			currentScene.init();
