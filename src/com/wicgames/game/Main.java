@@ -2,14 +2,16 @@ package com.wicgames.game;
 
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
+import java.util.function.BinaryOperator;
 
 import com.wicgames.scene.Scene;
+import com.wicgames.wicLibrary.Function;
 import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Frame;
 import com.wicgames.window.Panel;
 
 public class Main {
-	public static final String title = "The Quest For The Lex";
+	public static final String title = "Get That Book";
 	public static final int FPS = 60;
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 360;
@@ -23,9 +25,7 @@ public class Main {
 		//Main Method
 		panel.start();								//Starts the game loop
 		Scene.currentScene = new SplashScreen();	//Sets the current Scene to the splash screen
-
 	}
-	
 	public static void update(double delta) {
 		//Updates the current scene if it exists
 		if (Scene.currentScene != null)

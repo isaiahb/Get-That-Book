@@ -10,11 +10,18 @@ import javax.imageio.ImageIO;
 import com.wicgames.game.Main;
 
 public class SpriteSheet {
-	private Vector2 spriteSize;
-	private Vector2 numSprites;
-	private BufferedImage sheet;
-	private BufferedImage[][] sprites;
-	private int borderSize;
+	private Vector2 spriteSize; //Size of a single sprite in sprite sheet
+	private Vector2 numSprites; //Number of sprites in sprite sheet
+	private BufferedImage sheet; //Sprite Sheet
+	private BufferedImage[][] sprites; //Two-D array holding sprites
+	private int borderSize; //Size of border around sprites in sprite sheet
+	/**
+	 * Creates sprite sheet , splits image into sprites
+	 * @param x Width of sprite
+	 * @param y Height of sprite
+	 * @param borderSize Size of border around sprite
+	 * 
+	 */
 	public SpriteSheet(String path,int x,int y, int borderSize){
 		spriteSize = new Vector2(x,y);
 		try {
@@ -25,9 +32,15 @@ public class SpriteSheet {
 		this.borderSize = borderSize;
 		numSprites = new Vector2(sheet.getWidth(null) / (spriteSize.x + borderSize), sheet.getHeight(null) / (spriteSize.y + borderSize));
 		sprites = new BufferedImage[x][y];
-		System.out.println(numSprites);
 		loadSprites();
 	}
+	/**
+	 * Gets sprite at x,y from sprite sheet
+	 * @param x X Position of sprite
+	 * @param y Y Position of sprite
+	 * @return Sprite at x and y
+	 * 
+	 */
 	private BufferedImage getSprite(int x, int y){
 		if(x > numSprites.x || y > numSprites.y) throw new ArrayIndexOutOfBoundsException();
 		Vector2 spritePosition = new Vector2(x * spriteSize.x,y * spriteSize.y);
@@ -38,13 +51,18 @@ public class SpriteSheet {
 			}
 		return sprite;
 	}
+	/**
+	 * Loads all sprites from sprite sheet and then removes only reference to sprite sheet (Garbage Collector will remove it).
+	 */
 	private void loadSprites(){
 		for(int x = 0;x < numSprites.x;x++)
 			for(int y = 0;y < numSprites.y;y++){
-				System.out.println("X" + x + "Y" + y);
 				sprites[x][y] = getSprite(x,y);
 			}
 		sheet = null;
 	}
+	/**
+	 * Gets image from sprite array
+	 */
 	public Image getImage(int x,int y){return sprites[x][y];}
 }

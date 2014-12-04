@@ -1,10 +1,14 @@
 package com.wicgames.window;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
+import com.wicgames.game.Data;
 
 public class Frame extends JFrame {
 	public Frame (int width, int height, String title) {
@@ -17,5 +21,16 @@ public class Frame extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				try {
+					Data.save.saveData("bin/assets/data/save/save.txt");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 }

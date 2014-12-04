@@ -23,7 +23,7 @@ public class LevelMenu extends Scene{
 		for(int x = 0;x < levelButtons.length;x++) {
 			for(int y = 0;y < levelButtons[x].length;y++) {
 				levelNum++;
-				if(levelNum <= Integer.parseInt(Data.save.getValue("curLevel")))
+				if(levelNum <= Integer.parseInt(Data.save.getValue("currentLevel")))
 					levelButtons[x][y] = new Button(buttons.getImage(1 + ((levelNum - 1)* 2), 0),100 + x * 32,100 +y * 32);
 				else
 					levelButtons[x][y] = new Button(buttons.getImage(((levelNum - 1)* 2), 0), 100 + x * 32, 100 + y * 32);
