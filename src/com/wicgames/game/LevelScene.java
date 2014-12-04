@@ -44,9 +44,10 @@ public class LevelScene extends Scene {
 				x = 0; //New Row set x to 0
 				char[] levelLine = levelReader.readLine().toCharArray();
 				for(char tile : levelLine){
-					GameObject obj = null;
-					obj = tile == '0' ? new Platform(x,y,1,1) : obj;
 					if(tile == '&')break; //& is character for end of level background
+					GameObject obj = null;
+					System.out.println(textureData.getValue("0"));
+					obj = tile == '0' ? new Platform(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue("0")))) : obj;
 					x++;
 				}
 				y++;

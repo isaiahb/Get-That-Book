@@ -32,6 +32,7 @@ public class SpriteSheet {
 		this.borderSize = borderSize;
 		numSprites = new Vector2(sheet.getWidth(null) / (spriteSize.x + borderSize), sheet.getHeight(null) / (spriteSize.y + borderSize));
 		sprites = new BufferedImage[x][y];
+		System.out.println(spriteSize.x + borderSize);
 		loadSprites();
 	}
 	public Vector2 getNumSprites() {
@@ -45,6 +46,7 @@ public class SpriteSheet {
 	 * 
 	 */
 	private BufferedImage getSprite(int x, int y){
+		System.out.println(x + "X" + y);
 		if(x > numSprites.x || y > numSprites.y) throw new ArrayIndexOutOfBoundsException(); //Trying to get sprite outside of sprite sheet
 		Vector2 spritePosition = new Vector2(x * spriteSize.x,y * spriteSize.y); //Gets position of sprite on sprite sheet
 		BufferedImage sprite = (BufferedImage) Main.frame.createImage((int)spriteSize.x,(int)spriteSize.y); //Creates new image to hold sprite
