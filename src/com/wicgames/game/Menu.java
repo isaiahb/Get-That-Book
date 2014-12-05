@@ -7,7 +7,7 @@ import com.wicgames.window.Button;
 import com.wicgames.window.Scene;
 
 public class Menu extends Scene {
-	Button play, level;
+	Button play, level, options;
 
 	public Menu() {
 		Main.panel.setLayout(null);
@@ -37,9 +37,16 @@ public class Menu extends Scene {
 			Scene.currentScene = new LevelMenu();
 			Scene.currentScene.init();
 		});
+		options = new Button("bin/assets/textures/OPTION.png", (int)Main.HALF.x, (int)Main.HALF.y + 100);
+		options.addActionListener((e) ->{
+			Scene.currentScene = new OptionMenu();
+			Scene.currentScene.init();
+		});
 		Main.panel.add(level);
+		Main.panel.add(options);
 		Main.frame.pack();
 		Scene.currentScene.drawables.add((Drawable) level);
+		Scene.currentScene.drawables.add((Drawable) options);
 	}
 
 }
