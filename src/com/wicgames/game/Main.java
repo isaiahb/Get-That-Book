@@ -15,8 +15,8 @@ public class Main {
 	public static final int HEIGHT = 576;
 	public static final Vector2 HALF = new Vector2(WIDTH/2, HEIGHT/2);
 	public static final int TILESIZE = 32;
-	public static int scale = 1;
-	public static Frame frame = new Frame(WIDTH*scale, HEIGHT*scale, title);
+	public static double scale = Double.parseDouble(Data.config.getValue("scale"));
+	public static Frame frame = new Frame((int)(WIDTH*scale),(int)(HEIGHT*scale), title);
 	public static Panel panel = new Panel(frame);
 	
 	public static void main(String[] args) {

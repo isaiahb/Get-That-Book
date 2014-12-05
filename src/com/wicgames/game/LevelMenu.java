@@ -33,9 +33,10 @@ public class LevelMenu extends Scene{
 						currentScene.init();  
 					});
 				}//Gets button regular button image
-				else
+				else{
 					levelButtons[x][y] = new Button(buttons.getImage(((levelNum - 1)* 2)), 100 + x * 32, 100 + y * 32); //Gets grayed out button image
-				
+					levelButtons[x][y].setEnabled(false);
+				}
 				Main.panel.add(levelButtons[x][y]);
 				Scene.currentScene.drawables.add((Drawable) levelButtons[x][y]);
 			}
