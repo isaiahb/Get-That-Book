@@ -36,7 +36,7 @@ public class Button extends JButton implements Drawable{
 			e.printStackTrace();
 		}
 		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
-		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);
+		super.setBounds((int)(texture.getWidth(null) * Main.scale),(int)(texture.getHeight(null) * Main.scale),(int)(position.x * Main.scale),(int)(position.y * Main.scale));
 		setRolloverEnabled(false);
 		removeMouseListener(getMouseListeners()[0]);
 		addMouseListener(new BasicButtonListener(this){
@@ -69,7 +69,7 @@ public class Button extends JButton implements Drawable{
 		this.position = new Vector2(x, y);
 		this.texture = texture;
 		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
-		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);
+		super.setBounds((int)(texture.getWidth(null) * Main.scale),(int)(texture.getHeight(null) * Main.scale),(int)(position.x * Main.scale),(int)(position.y * Main.scale));
 		setRolloverEnabled(false);
 		removeMouseListener(getMouseListeners()[0]);
 		addMouseListener(new BasicButtonListener(this){

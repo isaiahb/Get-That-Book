@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Data {
-	public static Data config;
+	public static Data config = new Data("bin/assets/data/config/config");
 	public static Data save = new Data("bin/assets/data/save/save");
 	private ArrayList<keypair> data;
 	public Data(String path){
