@@ -1,5 +1,6 @@
 package com.wicgames.input;
 
-public class Key {
+public abstract class Key {
+	
 
 }
