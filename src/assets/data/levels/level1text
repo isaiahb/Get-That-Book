@@ -2,6 +2,9 @@ spritesheet:bin/assets/textures/Making Textures.png
 x:32
 y:32
 border:1
-0:0
+o:5
 1:1
-2:2
+2:3
+3:2
+4:4
+0:0
