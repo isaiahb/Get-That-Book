@@ -10,8 +10,8 @@ import com.wicgames.window.Panel;
 public class Main {
 	public static final String title = "Get That Book";
 	public static final int FPS = 60;
-	public static final int WIDTH = 640;
-	public static final int HEIGHT = 360;
+	public static final int WIDTH = 1024;
+	public static final int HEIGHT = 576;
 	public static final Vector2 HALF = new Vector2(WIDTH/2, HEIGHT/2);
 	public static final int TILESIZE = 32;
 	public static int scale = 1;

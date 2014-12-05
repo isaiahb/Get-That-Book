@@ -59,7 +59,7 @@ public class Button extends JButton implements Drawable{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				model.setArmed(false);
+				model.setPressed(false);
 			}
 		});
 	}

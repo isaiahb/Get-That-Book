@@ -48,6 +48,7 @@ public class LevelScene extends Scene {
 					GameObject obj = null;
 					System.out.println(textureData.getValue("0"));
 					obj = tile == '0' ? new Platform(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue("0")))) : obj;
+					obj = tile == '1' ? new Platform(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue("1")))) : obj;
 					x++;
 				}
 				y++;
