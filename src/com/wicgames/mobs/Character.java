@@ -9,10 +9,10 @@ public class Character extends Mob {
         health = 100;
         armour = 10;
         damageBoost = 2;
-        /*try {
+        try {
             texture = ImageIO.read(new File("bin/assets/textures/character.png"));
         } catch (IOException e) {
             System.out.println("character texture failed");
-        }*/
+        }
     }
 }
