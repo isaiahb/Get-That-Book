@@ -16,6 +16,7 @@ public abstract class GameObject implements Drawable {
 	public static void created(GameObject object) {
 		//Called when ever a game object is created, anything that extends GameObject needs to call this in its constructor
 		Scene.currentScene.objects.add(object);
+		Scene.currentScene.bodies.add(object.body);
 		Scene.currentScene.drawables.add(object);
 	}
 	

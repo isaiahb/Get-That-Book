@@ -16,14 +16,18 @@ public abstract class CollisionResolution {
 		// Do not resolve if both objects have infinite mass
 		if (totalIMass <= 0 || m.penetration <= 0) return;
 		Vector2 movePerIMass = Vector2.mul(m.normal, m.penetration/totalIMass);	// Calculates translating vector/direction
-		
 		// Apply translation
 		a.position.add(Vector2.mul(movePerIMass, -a.inverseMass)); 
 		b.position.add(Vector2.mul(movePerIMass, b.inverseMass));
 		
 	}
+	public static void resolveVelocity(Manifold m){
+		m.a.velocity.sub(Vector2.mul(m.normal,Vector2.dotProduct(m.a.velocity, m.normal)));
+		m.b.velocity.sub(Vector2.mul(m.normal,Vector2.dotProduct(m.b.velocity, m.normal)));
+	}
 	public static void resolve(Manifold m) {
 		resolvePenetration(m);
+		resolveVelocity(m);
 	}
 
 	public static void update(ArrayList<Manifold> manifolds) {

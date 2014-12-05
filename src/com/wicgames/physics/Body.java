@@ -34,7 +34,10 @@ public class Body {
 	
 	public void setMass(double mass) {
 		this.mass = mass; 
-		inverseMass = 1/mass;
+		if(mass != 0)
+			inverseMass = 1/mass;
+		else
+			inverseMass = 0;
 	}
 	public void anchor() {
 		setMass(0);

@@ -12,13 +12,15 @@ import com.wicgames.gameObjects.Platform;
 import com.wicgames.gameObjects.Scenery;
 import com.wicgames.wicLibrary.SpriteSheet;
 import com.wicgames.window.Scene;
-
+import com.wicgames.mobs.Character;
 public class LevelScene extends Scene {
 	public String levelName;
 	public Data textureData;
 	public SpriteSheet textures;
+	private Character player;
 	public void init() {
 		loadLevel("bin/assets/data/levels/" + levelName);
+		player = new Character();
 	}
 	public LevelScene(int level){
 		levelName = "level" + level; //Name of level file
@@ -58,9 +60,7 @@ public class LevelScene extends Scene {
 									new Scenery(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile)))));
 					else 
 						obj = new InvisiblePlatform(x,y,1,1);			
-					
-										
-					
+					obj.body.anchor();
 					x++;
 				}
 				y++;
