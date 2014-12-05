@@ -3,6 +3,7 @@ package com.wicgames.game;
 import java.awt.Graphics2D;
 
 import com.wicgames.input.Key;
+import com.wicgames.wicLibrary.Function;
 import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Frame;
 import com.wicgames.window.Panel;
@@ -20,10 +21,18 @@ public class Main {
 	public static Panel panel = new Panel(frame);
 	
 	public static void main(String[] args) {
-		//System.out.println(Key.down.s);
+		System.out.println((int)'a');
 		//Main Method
 		panel.start();								//Starts the game loop
 		Scene.currentScene = new SplashScreen();	//Sets the current Scene to the splash screen
+		Key.init();		//Initializes Key Class
+		Key.typed.connect(new Function(){
+			public <T>void call(T c) {
+				System.out.println(c);
+			}
+		});
+		
+
 	}
 	public static void update(double delta) {
 		//Updates the current scene if it exists
