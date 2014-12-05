@@ -1,10 +1,10 @@
 package com.wicgames.game;
 
-import com.wicgames.scene.Scene;
 import com.wicgames.wicLibrary.Drawable;
 import com.wicgames.wicLibrary.SpriteSheet;
 import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Button;
+import com.wicgames.window.Scene;
 
 public class LevelMenu extends Scene{
 	

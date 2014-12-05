@@ -1,16 +1,17 @@
 package com.wicgames.game;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 import com.wicgames.gameObjects.GameObject;
+import com.wicgames.gameObjects.InvisiblePlatform;
 import com.wicgames.gameObjects.Platform;
 import com.wicgames.gameObjects.Scenery;
-import com.wicgames.scene.Scene;
 import com.wicgames.wicLibrary.SpriteSheet;
+import com.wicgames.window.Scene;
 
 public class LevelScene extends Scene {
 	public String levelName;
@@ -24,6 +25,8 @@ public class LevelScene extends Scene {
 	}
 	@Override
 	public void draw(Graphics2D graphics2D) {
+		graphics2D.setColor(new Color(110, 200, 235));
+		graphics2D.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
 		super.draw(graphics2D);
 	}
 
@@ -44,13 +47,20 @@ public class LevelScene extends Scene {
 			while(levelReader.ready()){
 				x = 0; //New Row set x to 0
 				char[] levelLine = levelReader.readLine().toCharArray();
-				for(char tile : levelLine){
+				for(char tile : levelLine) {
+					
 					if(tile == '&')break; //& is character for end of level background
+					if(String.valueOf(tile).equals(textureData.getValue("sky"))){x++; continue;}
 					GameObject obj;
-					if(tile < 64)
-						obj = new Platform(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile)))));
-					else if(tile < 127)
-						obj = new Scenery(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile)))));
+					if (!String.valueOf(tile).equals(textureData.getValue("invisible"))) 
+							obj = tile < 64? 
+									new Platform(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile))))):					
+									new Scenery(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile)))));
+					else 
+						obj = new InvisiblePlatform(x,y,1,1);			
+					
+										
+					
 					x++;
 				}
 				y++;

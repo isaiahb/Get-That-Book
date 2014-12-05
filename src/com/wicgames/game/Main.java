@@ -2,10 +2,10 @@ package com.wicgames.game;
 
 import java.awt.Graphics2D;
 
-import com.wicgames.scene.Scene;
 import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Frame;
 import com.wicgames.window.Panel;
+import com.wicgames.window.Scene;
 
 public class Main {
 	public static final String title = "Get That Book";

@@ -2,9 +2,9 @@ package com.wicgames.game;
 
 import java.awt.Graphics2D;
 
-import com.wicgames.scene.Scene;
 import com.wicgames.wicLibrary.Drawable;
 import com.wicgames.window.Button;
+import com.wicgames.window.Scene;
 
 public class Menu extends Scene {
 	Button play, level;

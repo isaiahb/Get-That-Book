@@ -1,4 +1,4 @@
-package com.wicgames.scene;
+package com.wicgames.window;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;

@@ -6,8 +6,8 @@ import java.awt.Image;
 
 import com.wicgames.game.Main;
 import com.wicgames.physics.Body;
-import com.wicgames.scene.Scene;
 import com.wicgames.wicLibrary.Drawable;
+import com.wicgames.window.Scene;
 
 public abstract class GameObject implements Drawable {
 	public static int tileSize = Main.TILESIZE;	//Creates a global variable in all game objects with the tile size

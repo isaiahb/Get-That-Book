@@ -4,8 +4,10 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
-import com.wicgames.scene.Scene;
+
+import com.wicgames.window.Scene;
 
 public class SplashScreen extends Scene {
 	public Image splash;
