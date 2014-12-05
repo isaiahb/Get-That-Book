@@ -38,8 +38,8 @@ public abstract class CollisionDetection {
 		minA = a.position;	maxA = Vector2.add(minA,a.size);
 		minB = b.position;	maxB = Vector2.add(minB,b.size);
 		
-		if(maxA.x < minB.x || minA.x > maxB.x) return;
-		if(maxA.y < minB.y || minA.y > maxB.y) return;
+		if(maxA.x+1 < minB.x || minA.x+1 > maxB.x) return;
+		if(maxA.y+1 < minB.y || minA.y+1 > maxB.y) return;
 		//return true;
 		
 		//Collision is happening so generate manifold
@@ -58,14 +58,14 @@ public abstract class CollisionDetection {
 		double oY = Math.abs(dY - hY);
 		
 		if (oX < oY) {
-			m.penetration = oX;
+			m.penetration = oX-1;
 			if (centerA.x > centerB.x)
 				m.normal = new Vector2(-1, 0);
 			else
 				m.normal = new Vector2(1,0);
 		} 
 		else {
-			m.penetration = oY;
+			m.penetration = oY-1;
 			if (centerA.y > centerB.y)
 				m.normal = new Vector2(0, -1);
 			else
