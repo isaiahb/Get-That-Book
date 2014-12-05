@@ -20,6 +20,7 @@ import com.wicgames.wicLibrary.Vector2;
 public class Button extends JButton implements Drawable{
 	public Image texture;
 	public Vector2 position;
+	private boolean rolledOver = false,pressed = false;
 	public Button() {
 		this.position = new Vector2();
 		setBackground(new Color(0,0,0,0));
@@ -36,13 +37,28 @@ public class Button extends JButton implements Drawable{
 		}
 		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
 		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);
-		setRolloverEnabled(false);
 		removeMouseListener(getMouseListeners()[0]);
 		addMouseListener(new BasicButtonListener(this){
 			@Override
 			public void mousePressed(MouseEvent e) {
 				super.mousePressed(e);
 				model.setPressed(false);
+				pressed = true;
+			}@Override
+			public void mouseReleased(MouseEvent e) {
+				super.mouseReleased(e);
+				pressed = false;
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+				model.setRollover(false);
+				rolledOver = true;
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+				rolledOver = false;
 			}
 		});
 	}
@@ -53,13 +69,28 @@ public class Button extends JButton implements Drawable{
 		this.texture = texture;
 		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
 		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);
-		setRolloverEnabled(false);
 		removeMouseListener(getMouseListeners()[0]);
 		addMouseListener(new BasicButtonListener(this){
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				super.mouseClicked(e);
+			public void mousePressed(MouseEvent e) {
+				super.mousePressed(e);
 				model.setPressed(false);
+				pressed = true;
+			}@Override
+			public void mouseReleased(MouseEvent e) {
+				super.mouseReleased(e);
+				pressed = false;
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+				model.setRollover(false);
+				rolledOver = true;
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+				rolledOver = false;
 			}
 		});
 	}
