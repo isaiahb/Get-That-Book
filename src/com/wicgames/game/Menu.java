@@ -26,7 +26,7 @@ public class Menu extends Scene {
 		play = new Button("bin/assets/textures/PlayButton24.png", (int)Main.HALF.x, (int)Main.HALF.y);
 		play.addActionListener((e) -> {
 			System.out.println("Clicked");
-			Scene.currentScene = new LevelMenu();
+			Scene.currentScene = new LevelScene(Integer.parseInt(Data.save.getValue("currentLevel")));
 			Scene.currentScene.init();
 		});
 		Main.panel.add(play);
