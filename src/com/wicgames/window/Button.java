@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -33,6 +35,7 @@ public class Button extends JButton implements Drawable{
 		}
 		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
 		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);
+		setRolloverEnabled(false);
 	}
 	public Button(Image texture, int x, int y){
 		setBackground(new Color(0,0,0,0));
@@ -41,11 +44,11 @@ public class Button extends JButton implements Drawable{
 		this.texture = texture;
 		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
 		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);
+		setRolloverEnabled(false);
 	}
 	public void paint(Graphics g){}
 	public void paintComponent(Graphics g){}
 	public void draw(Graphics2D g){
 		g.drawImage(texture,(int)position.x,(int)position.y,null);
 	}
-
 }

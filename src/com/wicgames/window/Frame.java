@@ -1,5 +1,6 @@
 package com.wicgames.window;
 
+import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;

@@ -44,10 +44,10 @@ public class Panel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		Graphics2D graphics2D = (Graphics2D) g;
 		graphics2D.setColor(Color.WHITE);
-		//System.out.println(g);
 		graphics2D.scale(Main.scale, Main.scale);
 		graphics2D.fillRect(0, 0, getWidth(), getHeight());
 		//super.paintComponents(graphics2D);
 		Main.draw(graphics2D);
+		graphics2D.dispose();
 	}
 }
