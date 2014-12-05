@@ -45,10 +45,8 @@ public class LevelScene extends Scene {
 				char[] levelLine = levelReader.readLine().toCharArray();
 				for(char tile : levelLine){
 					if(tile == '&')break; //& is character for end of level background
-					GameObject obj = null;
-					System.out.println(textureData.getValue("0"));
-					obj = tile == '0' ? new Platform(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue("0")))) : obj;
-					obj = tile == '1' ? new Platform(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue("1")))) : obj;
+					GameObject obj = new Platform(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile)))));
+					obj.body.canCollide = tile == '0' ? false : true;
 					x++;
 				}
 				y++;
@@ -56,6 +54,7 @@ public class LevelScene extends Scene {
 			while(levelReader.ready()){
 				
 			}
+			levelReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

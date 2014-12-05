@@ -26,14 +26,16 @@ public class LevelMenu extends Scene{
 			for(int y = 0;y < levelButtons[x].length;y++) {
 				levelNum++;
 				final int buttonLevel = levelNum;
-				if(levelNum <= Integer.parseInt(Data.save.getValue("currentLevel")))
-					levelButtons[x][y] = new Button(buttons.getImage(1 + ((levelNum - 1)* 2)),100 + x * 32,100 +y * 32); //Gets button regular button image
+				if(levelNum <= Integer.parseInt(Data.save.getValue("currentLevel"))){
+					levelButtons[x][y] = new Button(buttons.getImage(1 + ((levelNum - 1)* 2)),100 + x * 32,100 +y * 32);
+					levelButtons[x][y].addActionListener((e) ->{
+						currentScene = new LevelScene(buttonLevel);
+						currentScene.init();  
+					});
+				}//Gets button regular button image
 				else
 					levelButtons[x][y] = new Button(buttons.getImage(((levelNum - 1)* 2)), 100 + x * 32, 100 + y * 32); //Gets grayed out button image
-				levelButtons[x][y].addActionListener((e) ->{
-					currentScene = new LevelScene(buttonLevel);
-					currentScene.init();  
-				});
+				
 				Main.panel.add(levelButtons[x][y]);
 				Scene.currentScene.drawables.add((Drawable) levelButtons[x][y]);
 			}

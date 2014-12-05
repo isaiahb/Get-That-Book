@@ -5,11 +5,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.plaf.basic.BasicButtonListener;
 
@@ -37,6 +37,7 @@ public class Button extends JButton implements Drawable{
 		}
 		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
 		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);
+		setRolloverEnabled(false);
 		removeMouseListener(getMouseListeners()[0]);
 		addMouseListener(new BasicButtonListener(this){
 			@Override
@@ -69,6 +70,7 @@ public class Button extends JButton implements Drawable{
 		this.texture = texture;
 		position.sub(texture.getWidth(null) / 2,texture.getHeight(null) / 2);
 		super.setBounds(texture.getWidth(null) * Main.scale,texture.getHeight(null) * Main.scale,(int)position.x * Main.scale,(int)position.y * Main.scale);
+		setRolloverEnabled(false);
 		removeMouseListener(getMouseListeners()[0]);
 		addMouseListener(new BasicButtonListener(this){
 			@Override
