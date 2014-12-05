@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import com.wicgames.gameObjects.GameObject;
 import com.wicgames.gameObjects.Platform;
+import com.wicgames.gameObjects.Scenery;
 import com.wicgames.scene.Scene;
 import com.wicgames.wicLibrary.SpriteSheet;
 
@@ -45,8 +46,11 @@ public class LevelScene extends Scene {
 				char[] levelLine = levelReader.readLine().toCharArray();
 				for(char tile : levelLine){
 					if(tile == '&')break; //& is character for end of level background
-					GameObject obj = new Platform(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile)))));
-					obj.body.canCollide = tile == '0' ? false : true;
+					GameObject obj;
+					if(tile < 64)
+						obj = new Platform(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile)))));
+					else if(tile < 127)
+						obj = new Scenery(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile)))));
 					x++;
 				}
 				y++;
