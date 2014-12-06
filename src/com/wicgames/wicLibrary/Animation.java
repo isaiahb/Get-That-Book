@@ -10,7 +10,7 @@ public class Animation {
 	public static ArrayList<Animation> all = new ArrayList<Animation>();
 	private SpriteSheet animations;
 	private Drawable animated;
-	private int frameDelay;
+	private double frameDelay;
 	private double currentTime;
 	private int currentIndex;
 	private int startIndex;
@@ -26,7 +26,7 @@ public class Animation {
 	 * @param loopNumber Number of time animation is looped through fully (-1 to loop forever)
 	 */
 	public Animation(SpriteSheet source, int startIndex, int nSprites,
-			Drawable texture, int frameDelay, int loopNumber) {
+			Drawable texture, double frameDelay, int loopNumber) {
 		animations = source;
 		this.startIndex = startIndex;
 		this.endIndex = startIndex + nSprites - 1;
@@ -39,6 +39,7 @@ public class Animation {
 	}
 
 	public void update(double delta) {
+		System.out.println("ASDASD");
 		currentTime += delta;
 		if (currentTime > frameDelay) {
 			System.out.println("Next Image");
