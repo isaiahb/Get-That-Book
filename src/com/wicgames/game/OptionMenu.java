@@ -21,6 +21,9 @@ public class OptionMenu extends Scene{
 		save.addActionListener((e) ->{
 			Data.config.setValue("scale", String.valueOf(Integer.parseInt(((String)resolutions.getSelectedItem()).split("x")[0]) / (double)Main.WIDTH));
 			Main.scale = Double.parseDouble(Data.config.getValue("scale"));
+			Main.frame.setSize((int)(Main.WIDTH*Main.scale),(int)(Main.HEIGHT*Main.scale));
+			Main.panel.setPreferredSize(Main.frame.getSize());
+			Main.frame.pack();
 		});
 		resolutions.setFocusable(false);
 		Main.panel.add(save);

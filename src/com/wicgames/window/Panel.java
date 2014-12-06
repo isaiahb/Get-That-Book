@@ -48,7 +48,6 @@ public class Panel extends JPanel implements Runnable{
 		super.paintComponents(graphics2D);
 		graphics2D.scale(Main.scale, Main.scale);
 		Main.draw(graphics2D);
-
 		graphics2D.dispose();
 	}
 }
