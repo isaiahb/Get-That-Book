@@ -8,6 +8,8 @@ import com.wicgames.gameObjects.GameObject;
 import com.wicgames.physics.Body;
 import com.wicgames.physics.CollisionDetection;
 import com.wicgames.physics.CollisionResolution;
+import com.wicgames.physics.Constraint;
+import com.wicgames.physics.Force;
 import com.wicgames.physics.Manifold;
 import com.wicgames.wicLibrary.Animation;
 import com.wicgames.wicLibrary.Drawable;
@@ -20,7 +22,8 @@ public abstract class Scene {
 	public ArrayList<GameObject> objects = new ArrayList<GameObject>();	//Holds all the game objects
 	public ArrayList<Drawable> drawables = new ArrayList<Drawable>();	//Holds everything in the scene that can be drawn
 	public ArrayList<Body> bodies = new ArrayList<Body>();				//Holds all the bodies in the scene
-	
+	public ArrayList<Force> forces = new ArrayList<Force>();
+	public ArrayList<Constraint> constraints = new ArrayList<Constraint>();
 	public Scene() {
 		// Constructor for the scene, calls the  destroy method on the last scene when creating a new scene
 		if (Scene.currentScene != null)
@@ -29,7 +32,9 @@ public abstract class Scene {
 	public void update(double delta) {
 		//Basic update method for physics
 		Manifold.clearManifolds();
+		Force.update(forces);
 		Body.update(bodies, delta);
+		Constraint.update(constraints);
 		Animation.updateAll(delta);
 		//Constraint.update(constraints);
 		

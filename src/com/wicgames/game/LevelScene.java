@@ -10,17 +10,22 @@ import com.wicgames.gameObjects.GameObject;
 import com.wicgames.gameObjects.InvisiblePlatform;
 import com.wicgames.gameObjects.Platform;
 import com.wicgames.gameObjects.Scenery;
+import com.wicgames.mobs.Character;
+import com.wicgames.physics.Force;
+import com.wicgames.physics.Material;
 import com.wicgames.wicLibrary.SpriteSheet;
 import com.wicgames.window.Scene;
-import com.wicgames.mobs.Character;
 public class LevelScene extends Scene {
 	public String levelName;
 	public Data textureData;
 	public SpriteSheet textures;
 	private Character player;
+	private Force gravity = new Force.Gravity(0, 50);
 	public void init() {
 		loadLevel("bin/assets/data/levels/" + levelName);
 		player = new Character();
+		gravity.add(player.body);
+		forces.add(gravity);
 	}
 	public LevelScene(int level){
 		levelName = "level" + level; //Name of level file
@@ -59,8 +64,10 @@ public class LevelScene extends Scene {
 									new Platform(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile))))):					
 									new Scenery(x,y,1,1,textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile)))));
 					else 
-						obj = new InvisiblePlatform(x,y,1,1);			
-					obj.body.anchor();
+						obj = new InvisiblePlatform(x,y,1,1);		
+					obj.body.setMaterial(Material.Static);
+					size.x = Math.max(x * GameObject.tileSize, size.x);
+					size.y = Math.max(y * GameObject.tileSize, size.y);
 					x++;
 				}
 				y++;

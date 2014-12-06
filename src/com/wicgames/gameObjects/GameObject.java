@@ -7,6 +7,7 @@ import java.awt.Image;
 import com.wicgames.game.Main;
 import com.wicgames.physics.Body;
 import com.wicgames.wicLibrary.Drawable;
+import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Scene;
 
 public abstract class GameObject implements Drawable {
@@ -23,13 +24,14 @@ public abstract class GameObject implements Drawable {
 	public void draw(Graphics2D graphics2D) {
 		//TO DO - finish this method
 		//Will be used to draw the game object
+		Vector2 p = Vector2.sub(body.position, Scene.currentScene.camera);
 		if (texture != null)
-			graphics2D.drawImage(texture,(int)body.position.x,(int)body.position.y,null);
+			graphics2D.drawImage(texture,(int)p.x ,(int)p.y,null);
 		else{
 			graphics2D.setColor(Color.PINK);
-	        graphics2D.fillRect((int)body.position.x,(int)body.position.y,(int)body.size.x, (int) body.size.y);
+	        graphics2D.fillRect((int)p.x,(int)p.y,(int)body.size.x, (int) body.size.y);
 	        graphics2D.setColor(Color.BLACK);
-	        graphics2D.drawRect((int)body.position.x,(int)body.position.y,(int)body.size.x, (int) body.size.y);
+	        graphics2D.drawRect((int)p.x,(int)p.y,(int)body.size.x, (int) body.size.y);
 		}
 	}
 	@Override
