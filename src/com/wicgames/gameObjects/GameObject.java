@@ -32,5 +32,8 @@ public abstract class GameObject implements Drawable {
 	        graphics2D.drawRect((int)body.position.x,(int)body.position.y,(int)body.size.x, (int) body.size.y);
 		}
 	}
-	
+	@Override
+	public void updateImage(Image texture) {
+		this.texture = texture;
+	}
 }

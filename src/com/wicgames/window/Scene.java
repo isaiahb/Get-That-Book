@@ -9,6 +9,7 @@ import com.wicgames.physics.Body;
 import com.wicgames.physics.CollisionDetection;
 import com.wicgames.physics.CollisionResolution;
 import com.wicgames.physics.Manifold;
+import com.wicgames.wicLibrary.Animation;
 import com.wicgames.wicLibrary.Drawable;
 import com.wicgames.wicLibrary.Vector2;
 
@@ -29,6 +30,7 @@ public abstract class Scene {
 		//Basic update method for physics
 		Manifold.clearManifolds();
 		Body.update(bodies, delta);
+		Animation.updateAll(delta);
 		//Constraint.update(constraints);
 
 		CollisionDetection.BroadPhase(bodies);

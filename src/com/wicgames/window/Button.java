@@ -108,4 +108,8 @@ public class Button extends JButton implements Drawable{
 	public void draw(Graphics2D g){
 		g.drawImage(texture,(int)position.x,(int)position.y,null);
 	}
+	@Override
+	public void updateImage(Image texture) {
+		this.texture = texture;
+	}
 }

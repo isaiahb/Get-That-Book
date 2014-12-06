@@ -1,5 +1,6 @@
 package com.wicgames.game;
 
+import com.wicgames.wicLibrary.Animation;
 import com.wicgames.wicLibrary.Drawable;
 import com.wicgames.wicLibrary.SpriteSheet;
 import com.wicgames.wicLibrary.Vector2;
