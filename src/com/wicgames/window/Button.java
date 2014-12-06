@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -20,7 +21,7 @@ import com.wicgames.wicLibrary.Vector2;
 public class Button extends JButton implements Drawable{
 	public Image texture;
 	public Vector2 position;
-	private boolean rolledOver = false,pressed = false;
+	private boolean rolledOver = false,pressed = false, primed = false;
 	public Button() {
 		this.position = new Vector2();
 		setBackground(new Color(0,0,0,0));
@@ -42,23 +43,26 @@ public class Button extends JButton implements Drawable{
 		addMouseListener(new BasicButtonListener(this){
 			@Override
 			public void mousePressed(MouseEvent e) {
-				super.mousePressed(e);
-				model.setPressed(false);
+				if(!primed)
+					primed = true;
 				pressed = true;
 			}@Override
 			public void mouseReleased(MouseEvent e) {
-				super.mouseReleased(e);
+				if(primed){
+					for(ActionListener al : getActionListeners())
+						al.actionPerformed(new ActionEvent(model,1,model.getActionCommand()));
+					primed = false;
+				}
 				pressed = false;
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				super.mouseEntered(e);
-				model.setRollover(false);
+				primed = true;
 				rolledOver = true;
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				super.mouseExited(e);
+				primed = false;
 				rolledOver = false;
 			}
 		});
@@ -75,23 +79,26 @@ public class Button extends JButton implements Drawable{
 		addMouseListener(new BasicButtonListener(this){
 			@Override
 			public void mousePressed(MouseEvent e) {
-				super.mousePressed(e);
-				model.setPressed(false);
+				if(!primed)
+					primed = true;
 				pressed = true;
 			}@Override
 			public void mouseReleased(MouseEvent e) {
-				super.mouseReleased(e);
+				if(primed){
+					for(ActionListener al : getActionListeners())
+						al.actionPerformed(new ActionEvent(model,1,model.getActionCommand()));
+					primed = false;
+				}
 				pressed = false;
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				super.mouseEntered(e);
-				model.setRollover(false);
+				primed = true;
 				rolledOver = true;
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				super.mouseExited(e);
+				primed = false;
 				rolledOver = false;
 			}
 		});
