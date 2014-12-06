@@ -19,7 +19,7 @@ public class Main {
 	public static double scale;
 	public static Frame frame;
 	public static Panel panel;
-	
+	public static double delta;
 	public static void main(String[] args) {
 		//Main Method
 		init();
@@ -38,6 +38,7 @@ public class Main {
 		});
 	}
 	public static void update(double delta) {
+		Main.delta = delta;
 		//Updates the current scene if it exists
 		if (Scene.currentScene != null)
 			Scene.currentScene.update(delta);

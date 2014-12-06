@@ -32,7 +32,7 @@ public abstract class Scene {
 		Body.update(bodies, delta);
 		Animation.updateAll(delta);
 		//Constraint.update(constraints);
-
+		
 		CollisionDetection.BroadPhase(bodies);
 		CollisionResolution.update(Manifold.all);
 	}

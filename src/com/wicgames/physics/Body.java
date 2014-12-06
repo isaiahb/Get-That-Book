@@ -56,4 +56,9 @@ public class Body {
 			bodies.get(i).update(delta);
 		}
 	}
+	public boolean onTop(){
+		for(Body b : touching)
+			if(b.position.y >= position.y + size.y - 2)return true;
+		return false;
+	}
 }
