@@ -15,4 +15,7 @@ public class Event {
 	public void connect(Function function) {
 		functions.add(function);
 	}
+	public void disconnect(Function function){
+		functions.remove(function);
+	}
 }

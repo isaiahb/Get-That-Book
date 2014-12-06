@@ -11,6 +11,7 @@ import com.wicgames.window.Button;
 import com.wicgames.window.Scene;
 
 public class OptionMenu extends Scene{
+	Function goBack;
 	@Override
 	public void init() {
 		String[] res = {"1024x576","512x288","256x144"};
@@ -21,13 +22,18 @@ public class OptionMenu extends Scene{
 		});
 		Main.panel.add(save);
 		currentScene.drawables.add((Drawable) save);
-		Key.released[KeyEvent.VK_BACK_SPACE].connect(new Function(){
+		goBack = new Function(){
 			@Override
 			public void call() {
 				currentScene = new Menu();
 				currentScene.init();
 			}
-		});
+		};
+		Key.released[KeyEvent.VK_BACK_SPACE].connect(goBack);
 	}
-
+	@Override
+	public void destroy() {
+		super.destroy();
+		Key.released[KeyEvent.VK_BACK_SPACE].disconnect(goBack);
+	}
 }
