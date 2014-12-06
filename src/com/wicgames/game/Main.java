@@ -31,8 +31,6 @@ public class Main {
 				System.out.println(c);
 			}
 		});
-		
-
 	}
 	public static void update(double delta) {
 		//Updates the current scene if it exists

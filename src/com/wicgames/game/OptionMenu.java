@@ -1,8 +1,12 @@
 package com.wicgames.game;
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.JComboBox;
 
+import com.wicgames.input.Key;
 import com.wicgames.wicLibrary.Drawable;
+import com.wicgames.wicLibrary.Function;
 import com.wicgames.window.Button;
 import com.wicgames.window.Scene;
 
@@ -17,5 +21,13 @@ public class OptionMenu extends Scene{
 		});
 		Main.panel.add(save);
 		currentScene.drawables.add((Drawable) save);
+		Key.released[KeyEvent.VK_BACK_SPACE].connect(new Function(){
+			@Override
+			public void call() {
+				currentScene = new Menu();
+				currentScene.init();
+			}
+		});
 	}
+
 }
