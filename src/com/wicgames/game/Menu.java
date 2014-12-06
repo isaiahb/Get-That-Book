@@ -23,7 +23,7 @@ public class Menu extends Scene {
 
 	}
 	public void init() {
-		play = new Button("bin/assets/textures/PlayButton24.png", (int)Main.HALF.x, (int)Main.HALF.y);
+		play = new Button("bin/assets/textures/PlayButton24.png", (int)Main.HALF.x, (int)Main.HALF.y - 50);
 		play.addActionListener((e) -> {
 			System.out.println("Clicked");
 			Scene.currentScene = new LevelScene(Integer.parseInt(Data.save.getValue("currentLevel")));
@@ -32,12 +32,12 @@ public class Menu extends Scene {
 		Main.panel.add(play);
 		Main.frame.pack();
 		Scene.currentScene.drawables.add((Drawable) play);
-		level = new Button("bin/assets/textures/LEVEL.png", (int)Main.HALF.x, (int)Main.HALF.y + 50);
+		level = new Button("bin/assets/textures/LEVEL.png", (int)Main.HALF.x, (int)Main.HALF.y);
 		level.addActionListener((e) -> {
 			Scene.currentScene = new LevelMenu();
 			Scene.currentScene.init();
 		});
-		options = new Button("bin/assets/textures/OPTION.png", (int)Main.HALF.x, (int)Main.HALF.y + 100);
+		options = new Button("bin/assets/textures/OPTION.png", (int)Main.HALF.x, (int)Main.HALF.y + 50);
 		options.addActionListener((e) ->{
 			Scene.currentScene = new OptionMenu();
 			Scene.currentScene.init();
