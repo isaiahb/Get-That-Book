@@ -28,7 +28,8 @@ public class Frame extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				try {
-					Data.save.saveData("bin/assets/data/save/save.txt");
+					Data.save.saveData("bin/assets/data/save/save");
+					Data.config.saveData("bin/assets/data/config/config");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
