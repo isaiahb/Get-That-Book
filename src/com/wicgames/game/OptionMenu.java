@@ -1,6 +1,7 @@
 package com.wicgames.game;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JComboBox;
 
@@ -20,10 +21,8 @@ public class OptionMenu extends Scene{
 		Button save = new Button("bin/assets/textures/SaveButton.png",(int)(Main.WIDTH * 0.75),(int)(Main.HEIGHT * 0.75));
 		save.addActionListener((e) ->{
 			Data.config.setValue("scale", String.valueOf(Integer.parseInt(((String)resolutions.getSelectedItem()).split("x")[0]) / (double)Main.WIDTH));
-			Main.scale = Double.parseDouble(Data.config.getValue("scale"));
-			Main.frame.setSize((int)(Main.WIDTH*Main.scale),(int)(Main.HEIGHT*Main.scale));
-			Main.panel.setPreferredSize(Main.frame.getSize());
-			Main.frame.pack();
+			Main.frame.dispose();
+			Main.init();
 		});
 		resolutions.setFocusable(false);
 		Main.panel.add(save);

@@ -16,13 +16,18 @@ public class Main {
 	public static final int HEIGHT = 270;
 	public static final Vector2 HALF = new Vector2(WIDTH/2, HEIGHT/2);
 	public static final int TILESIZE = 32;
-	public static double scale = Double.parseDouble(Data.config.getValue("scale"));
-	public static Frame frame = new Frame((int)(WIDTH*scale),(int)(HEIGHT*scale), title);
-	public static Panel panel = new Panel(frame);
+	public static double scale;
+	public static Frame frame;
+	public static Panel panel;
 	
 	public static void main(String[] args) {
-		System.out.println((int)'a');
 		//Main Method
+		init();
+	}
+	public static void init(){
+		scale = Double.parseDouble(Data.config.getValue("scale"));
+		frame = new Frame((int)(WIDTH*scale),(int)(HEIGHT*scale), title);
+		panel = new Panel(frame);
 		panel.start();								//Starts the game loop
 		Scene.currentScene = new SplashScreen();	//Sets the current Scene to the splash screen
 		Key.init();		//Initializes Key Class
