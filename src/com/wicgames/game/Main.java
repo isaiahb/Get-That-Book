@@ -12,8 +12,8 @@ import com.wicgames.window.Scene;
 public class Main {
 	public static final String title = "Get That Book";
 	public static final int FPS = 60;
-	public static final int WIDTH = 1024;
-	public static final int HEIGHT = 576;
+	public static final int WIDTH = 480;
+	public static final int HEIGHT = 270;
 	public static final Vector2 HALF = new Vector2(WIDTH/2, HEIGHT/2);
 	public static final int TILESIZE = 32;
 	public static double scale = Double.parseDouble(Data.config.getValue("scale"));

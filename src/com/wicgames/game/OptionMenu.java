@@ -14,13 +14,13 @@ public class OptionMenu extends Scene{
 	Function goBack;
 	@Override
 	public void init() {
-		String[] res = {"1024x576","512x288","256x144"};
+		String[] res = {"3840x2160","2560x1440","1920x1080","1280x720","960x540","640x360","480x270"};
 		JComboBox<String> resolutions = new JComboBox<String>(res);
 		resolutions.setBounds((int)(Main.WIDTH * 0.1 * Main.scale),(int)(Main.HEIGHT * 0.1 * Main.scale),(int)(100 * Main.scale),(int)(50 * Main.scale));
 		Button save = new Button("bin/assets/textures/SaveButton.png",(int)(Main.WIDTH * 0.75),(int)(Main.HEIGHT * 0.75));
 		save.addActionListener((e) ->{
 			Data.config.setValue("scale", String.valueOf(Integer.parseInt(((String)resolutions.getSelectedItem()).split("x")[0]) / (double)Main.WIDTH));
-			System.out.println(Data.config.getValue("scale"));
+			Main.scale = Double.parseDouble(Data.config.getValue("scale"));
 		});
 		resolutions.setFocusable(false);
 		Main.panel.add(save);
