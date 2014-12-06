@@ -16,6 +16,15 @@ public class Animation {
 	private int startIndex;
 	private int endIndex;
 	private int loopNumber;
+	/**
+	 * 
+	 * @param source Sprite Sheet for animation
+	 * @param startIndex First Image in animation
+	 * @param nSprites Number of images in animation after first image(# of images = this + 1)
+	 * @param texture Drawable that is being animated
+	 * @param frameDelay Delay between frames (in seconds?)
+	 * @param loopNumber Number of time animation is looped through fully (-1 to loop forever)
+	 */
 	public Animation(SpriteSheet source, int startIndex, int nSprites,
 			Drawable texture, int frameDelay, int loopNumber) {
 		animations = source;
