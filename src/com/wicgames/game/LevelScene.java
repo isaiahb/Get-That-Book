@@ -45,7 +45,7 @@ public class LevelScene extends Scene {
 			int x = 0,y = 0; //X,Y of tile
 			BufferedReader levelReader = new BufferedReader(new FileReader(path));
 			textureData = new Data(path + "text");
-			textures = new SpriteSheet(textureData.getValue("spritesheet"), Integer.parseInt(textureData.getValue("x")), Integer.parseInt(textureData.getValue("y")), Integer.parseInt(textureData.getValue("border")));
+			textures = new SpriteSheet(textureData.getValue("spritesheet"), Integer.parseInt(textureData.getValue("x")), Integer.parseInt(textureData.getValue("y")), Integer.parseInt(textureData.getValue("border")),0);
 			while(levelReader.ready()){
 				x = 0; //New Row set x to 0
 				char[] levelLine = levelReader.readLine().toCharArray();

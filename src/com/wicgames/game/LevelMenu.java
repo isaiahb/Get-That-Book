@@ -15,7 +15,7 @@ public class LevelMenu extends Scene{
 	public LevelMenu() {
 		super();
 		Main.panel.setLayout(null);
-		buttons = new SpriteSheet("bin/assets/textures/ButtonSprites.png", 16, 16, 1);
+		buttons = new SpriteSheet("bin/assets/textures/ButtonSprites.png", 16, 16, 1,0);
 		sheetSize = buttons.getNumSprites();
 		levelButtons = new Button[(int) (sheetSize.x / 2)][(int) sheetSize.y];
 	}
