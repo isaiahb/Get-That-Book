@@ -26,8 +26,8 @@ import com.wicgames.window.Scene;
 
 public class Character extends Mob {
 	public static SpriteSheet walkingSheet, idleSheet, fallingSheet, jumpingSheet;
-	private Force moveRight = new Force.Gravity(400, 0);
-	private Force moveLeft = new Force.Gravity(-400, 0);
+	private Force moveRight = new Force.Gravity(5000, 0);
+	private Force moveLeft = new Force.Gravity(-5000, 0);
 	private Animation walking, idling, falling, jumping;
 	public Character() {
 		if(walkingSheet == null)
