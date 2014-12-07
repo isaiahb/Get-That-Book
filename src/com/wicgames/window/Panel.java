@@ -10,7 +10,10 @@ import javax.swing.JPanel;
 import com.wicgames.game.Main;
 
 public class Panel extends JPanel implements Runnable{
-	private boolean running = false;
+	public boolean running = false;
+	private long last;
+	private Thread loop;
+	
 	public Panel(JFrame frame) {
 		setFocusable(true);
 		this.setPreferredSize(frame.getSize());
@@ -18,26 +21,42 @@ public class Panel extends JPanel implements Runnable{
 		frame.add(this);
 		frame.setVisible(true);
 		frame.pack();
-		Thread loop = new Thread(this);
+		running = true;
+		loop = new Thread(this);
 		loop.start();
+		
 	}
 	
-	public void start() {
+	public void pause() {
+		running  = false;
+	}
+	public void resume() {
 		running = true;
-	}	
+		last = System.nanoTime();
+	}
 	public void run(){
-		long last = System.nanoTime();
+		last = System.nanoTime();
 		double delta;
-		while (running) {
-			double timeTaken = (double)(System.nanoTime() - last);
-			last = System.nanoTime();
-			delta = timeTaken/1000000000.00;
-			Main.update(delta);
-			repaint();
+		while (true) {
+			
+			while (running) {
+				double timeTaken = (double)(System.nanoTime() - last);
+				last = System.nanoTime();
+				delta = timeTaken/1000000000.00;
+				
+				Main.update(delta);
+				repaint();
+				try {
+					Thread.sleep((long) (1000.0/Main.FPS));
+				} 
+				catch (Exception e) {}	
+			}
+			System.out.println("Paused, press 'p' to unpause");
+			//Wait before checking if its running again
 			try {
 				Thread.sleep((long) (1000.0/Main.FPS));
 			} 
-			catch (Exception e) {}	
+			catch (Exception e) {}
 		}
 	}
 	
