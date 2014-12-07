@@ -17,7 +17,7 @@ public class Animation {
 	private int endIndex;
 	private int loopNumber;
 	private boolean running = false;
-
+	private Image stopImage;
 	/**
 	 * 
 	 * @param source
@@ -36,7 +36,7 @@ public class Animation {
 	 *            forever)
 	 */
 	public Animation(SpriteSheet source, int startIndex, int nSprites,
-			Drawable texture, double frameDelay, int loopNumber) {
+			Drawable texture, double frameDelay, int loopNumber, Image stopImage) {
 		animations = source;
 		this.startIndex = startIndex;
 		this.endIndex = startIndex + nSprites - 1;
@@ -45,9 +45,9 @@ public class Animation {
 		this.loopNumber = loopNumber;
 		this.currentTime = 0;
 		this.currentIndex = startIndex;
+		this.stopImage = stopImage;
 		all.add(this);
 	}
-
 	public void update(double delta) {
 		if (running) {
 			currentTime += delta;
@@ -97,8 +97,6 @@ public class Animation {
 
 	public void stop() {
 		running = false;
-		BufferedImage nextSprite = (BufferedImage) animations
-				.getImage(startIndex);
-		animated.updateImage(nextSprite);
+		animated.updateImage(stopImage);
 	}
 }

@@ -58,10 +58,7 @@ public class SpriteSheet {
 			for(int yPos = 0;yPos < spriteSize.y;yPos++){
 				//Copy's Pixels from sprite sheet to sprite image
 				int rgb = sheet.getRGB((int)(xPos + spritePosition.x + x*borderSize),(int)(yPos + spritePosition.y + y*borderSize));
-				if(rgb != -16777216)
-					sprite.setRGB(xPos, yPos, rgb);
-				else
-					sprite.setRGB(xPos, yPos,16777216);
+				sprite.setRGB(xPos, yPos, rgb);
 			}
 		return sprite;
 	}

@@ -32,7 +32,7 @@ public class Character extends Mob {
 	public Character() {
 		if(walkingSheet == null)
 			walkingSheet = new SpriteSheet("bin/assets/textures/CharacterWalking.png",22,64,2,1);
-		walking = new Animation(walkingSheet,0,5,this,0.15,-1);
+		walking = new Animation(walkingSheet,0,5,this,0.15,-1,walkingSheet.getImage(0));
 		health = 100;
 		armour = 10;
 		damageBoost = 2;
@@ -50,19 +50,23 @@ public class Character extends Mob {
 				left = true;
 				if (!moveLeft.bodies.contains(Character.this.body))
 					moveLeft.add(Character.this.body);
+				walking.start();
 			}
 		});
 		Key.released[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
 				right = false;
 				moveRight.remove(Character.this.body);
-				walking.stop();
+				if(!left)
+					walking.stop();
 			}
 		});
 		Key.released[Integer.parseInt(Data.config.getValue("Move Left"))].connect(new Function() {
 			public void call() {
 				left = false;
 				moveLeft.remove(Character.this.body);
+				if(!right)
+					walking.stop();
 			}
 		});
 		Key.pressed[Integer.parseInt(Data.config.getValue("Jump"))].connect(new Function() {
