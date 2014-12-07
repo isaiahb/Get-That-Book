@@ -16,11 +16,12 @@ public class SplashScreen extends Scene implements Drawable{
 	public Image splash;
 	private double timeElapsed;
 	private double showTime = 2;
+	private Animation candle;
 	public SplashScreen() {
 		super();
 		SpriteSheet animate = new SpriteSheet("bin/assets/textures/WIC64.png",64,64,1,0);
 		splash = animate.getImage(0);
-		new Animation(animate, 1, 1, this, 0.2, -1);
+		candle = new Animation(animate, 1, 1, this, 0.2, -1);
 	}
 
 	@Override
@@ -36,6 +37,8 @@ public class SplashScreen extends Scene implements Drawable{
 			System.out.println("Moving to next scene");
 			currentScene = new Menu();
 			currentScene.init();
+			candle.destroy();
+			candle = null;
 		}
 	}
 
