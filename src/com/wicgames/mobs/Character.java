@@ -2,7 +2,6 @@ package com.wicgames.mobs;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -12,6 +11,7 @@ import com.sun.javafx.Utils;
 import com.wicgames.game.Data;
 import com.wicgames.game.Main;
 import com.wicgames.input.Key;
+import com.wicgames.physics.Body;
 import com.wicgames.physics.Force;
 import com.wicgames.physics.Material;
 import com.wicgames.physics.Rectangle;
@@ -27,10 +27,6 @@ public class Character extends Mob {
 		health = 100;
 		armour = 10;
 		damageBoost = 2;
-		moveSpeed = 0.4;
-		maxSpeed = 4;
-		slowSpeed = 0.1;
-		gravitySpeed = 0.3;
 		jumpThreshold = 0.032;
 		Key.pressed[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
@@ -75,7 +71,6 @@ public class Character extends Mob {
 			public void update(double delta) {
 				super.update(delta);
 				velocity.x = Math.copySign(Math.max(Math.abs(velocity.x) - 8,0), velocity.x);
-				velocity.y = Math.copySign(Math.max(Math.abs(velocity.y) - 8,0), velocity.y);
 				velocity.x = Utils.clamp(-1000, velocity.x, 1000);
 				velocity.y = Utils.clamp(-1000, velocity.y, 1000);
 				
@@ -121,8 +116,14 @@ public class Character extends Mob {
 		if(jumpCall > jumpThreshold){//Jumprequest expired
 			jumpRequest = false;
 		}
-		if(jumpRequest && body.onTop())
+		if(jumpRequest && onTopAny())
 			body.velocity.y += -500;
 			
+	}
+	public boolean onTopAny(){
+		for(Body b : body.touching)
+			if(body.onTop(b) && !body.besideOf(b))
+				return true;
+		return false;
 	}
 }

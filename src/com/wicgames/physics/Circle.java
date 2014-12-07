@@ -69,10 +69,23 @@ public class Circle extends Body {
 
 
 	@Override
-	public boolean onTop() {
-		for(Body b : touching)
-			if(center().y + size.y / 2  <= b.position.y)
-				return true;
+	public boolean onTop(Body b) {
+		if(center().y + size.y / 2  <= b.position.y)
+			return true;
+		return false;
+	}
+
+
+
+	@Override
+	public boolean leftOf(Body b) {
+		return false;
+	}
+
+
+
+	@Override
+	public boolean rightOf(Body b) {
 		return false;
 	}
 }

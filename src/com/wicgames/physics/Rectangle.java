@@ -57,10 +57,23 @@ public class Rectangle extends Body {
 	}
 
 	@Override
-	public boolean onTop() {
-		for(Body b : touching)
-			if(position.y + size.y <= b.position.y + 20)
+	public boolean onTop(Body b) {
+		if(position.y + size.y <= b.position.y + 1)
 				return true;
+		return false;
+	}
+
+	@Override
+	public boolean leftOf(Body b) {
+		if(position.x + 1>= b.position.x + b.size.x)
+			return true;
+		return false;
+	}
+
+	@Override
+	public boolean rightOf(Body b) {
+		if(position.x + size.x  - 1<= b.position.x)
+			return true;
 		return false;
 	}
 }
