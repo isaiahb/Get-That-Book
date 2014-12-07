@@ -52,7 +52,6 @@ public class Animation {
 		if (running) {
 			currentTime += delta;
 			if (currentTime > frameDelay) {
-				System.out.println("Next Image");
 				currentTime = 0;
 				nextImage();
 				currentIndex++;
@@ -77,6 +76,9 @@ public class Animation {
 		}
 	}
 
+	public boolean isRunning() {
+		return running;
+	}
 	public void destroy() {
 		all.remove(this);
 	}

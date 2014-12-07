@@ -25,14 +25,21 @@ import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Scene;
 
 public class Character extends Mob {
-	public static SpriteSheet walkingSheet;
-	private Force moveLeft = new Force.Gravity(-400, 0);
+	public static SpriteSheet walkingSheet, idleSheet, fallingSheet, jumpingSheet;
 	private Force moveRight = new Force.Gravity(400, 0);
-	private Animation walking;
+	private Force moveLeft = new Force.Gravity(-400, 0);
+	private Animation walking, idling, falling, jumping;
 	public Character() {
 		if(walkingSheet == null)
 			walkingSheet = new SpriteSheet("bin/assets/textures/CharacterWalking.png",22,64,2,1);
-		walking = new Animation(walkingSheet,0,5,this,0.15,-1,walkingSheet.getImage(0));
+		if(idleSheet == null)
+			idleSheet = new SpriteSheet("bin/assets/textures/CharacterIdol.png",22,64,2,1);
+		if(fallingSheet == null)
+			fallingSheet = new SpriteSheet("bin/assets/textures/FallingSheet.png",22,64,2,1);
+		falling = new Animation(fallingSheet,0,1,this,0.1,-1,idleSheet.getImage(0));
+		walking = new Animation(walkingSheet,0,5,this,0.1,-1,idleSheet.getImage(0));
+		idling = new Animation(idleSheet,0,9,this,0.1,-1,idleSheet.getImage(0));
+		idling.start();
 		health = 100;
 		armour = 10;
 		damageBoost = 2;
@@ -40,33 +47,27 @@ public class Character extends Mob {
 		Key.pressed[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
 				right = true;
-				if (!moveRight.bodies.contains(Character.this.body))
-					moveRight.add(Character.this.body);
-				walking.start();
+				if(!moveRight.bodies.contains(body))
+					moveRight.add(body);
 			}
 		});
 		Key.pressed[Integer.parseInt(Data.config.getValue("Move Left"))].connect(new Function() {
 			public void call() {
 				left = true;
-				if (!moveLeft.bodies.contains(Character.this.body))
-					moveLeft.add(Character.this.body);
-				walking.start();
+				if(!moveLeft.bodies.contains(body))
+					moveLeft.add(body);
 			}
 		});
 		Key.released[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
 				right = false;
-				moveRight.remove(Character.this.body);
-				if(!left)
-					walking.stop();
+				moveRight.remove(body);
 			}
 		});
 		Key.released[Integer.parseInt(Data.config.getValue("Move Left"))].connect(new Function() {
 			public void call() {
 				left = false;
-				moveLeft.remove(Character.this.body);
-				if(!right)
-					walking.stop();
+				moveLeft.remove(body);
 			}
 		});
 		Key.pressed[Integer.parseInt(Data.config.getValue("Jump"))].connect(new Function() {
@@ -81,9 +82,7 @@ public class Character extends Mob {
 			public void update(double delta) {
 				super.update(delta);
 				velocity.x = Math.copySign(Math.max(Math.abs(velocity.x) - 8,0), velocity.x);
-				velocity.x = Utils.clamp(-1000, velocity.x, 1000);
-				velocity.y = Utils.clamp(-1000, velocity.y, 1000);
-				
+				velocity.x = Utils.clamp(-100,velocity.x,100);
 				Vector2 mid = Main.HALF;
 				Vector2 offset = Vector2.sub(position, mid);
 				Vector2 sceneSize = Scene.currentScene.size;
@@ -129,10 +128,34 @@ public class Character extends Mob {
 			jumpRequest = false;
 		}
 		if(jumpRequest && onTopAny()){
-			body.velocity.y += -500;
+			body.velocity.y += -400;
 			jumpRequest = false;
 		}
 		jumpThreshold = delta * 20;
+		//Animation
+		if(body.velocity.y > 30){
+			if(!falling.isRunning())
+				falling.start();
+			if(idling.isRunning())
+				idling.stop();
+			if(walking.isRunning())
+				walking.stop();
+		}
+		else if(left || right){
+			if(!walking.isRunning())
+				walking.start();
+			if(idling.isRunning())
+				idling.stop();
+			if(falling.isRunning())
+				falling.stop();
+		}else{
+			if(!idling.isRunning())
+				idling.start();
+			if(walking.isRunning())
+				walking.stop();
+			if(falling.isRunning())
+				falling.stop();
+		}
 	}
 	public boolean onTopAny(){
 		for(Body b : body.touching)
