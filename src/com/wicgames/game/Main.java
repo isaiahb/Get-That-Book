@@ -1,6 +1,7 @@
 package com.wicgames.game;
 
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 
 import com.wicgames.input.Key;
 import com.wicgames.wicLibrary.Function;

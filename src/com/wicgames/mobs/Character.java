@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import com.sun.javafx.Utils;
+import com.wicgames.game.Data;
 import com.wicgames.game.Main;
 import com.wicgames.input.Key;
 import com.wicgames.physics.Force;
@@ -31,39 +32,39 @@ public class Character extends Mob {
 		slowSpeed = 0.1;
 		gravitySpeed = 0.3;
 		jumpThreshold = 0.032;
-		Key.pressed[KeyEvent.VK_D].connect(new Function() {
+		Key.pressed[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
 				right = true;
 				if (!moveRight.bodies.contains(Character.this.body))
 					moveRight.add(Character.this.body);
 			}
 		});
-		Key.pressed[KeyEvent.VK_A].connect(new Function() {
+		Key.pressed[Integer.parseInt(Data.config.getValue("Move Left"))].connect(new Function() {
 			public void call() {
 				left = true;
 				if (!moveLeft.bodies.contains(Character.this.body))
 					moveLeft.add(Character.this.body);
 			}
 		});
-		Key.pressed[KeyEvent.VK_W].connect(new Function() {
+		Key.pressed[Integer.parseInt(Data.config.getValue("Jump"))].connect(new Function() {
 			public void call() {
 				jumping = true;
 				jumpCall = 0;
 			}
 		});
-		Key.released[KeyEvent.VK_D].connect(new Function() {
+		Key.released[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
 				right = false;
 				moveRight.remove(Character.this.body);
 			}
 		});
-		Key.released[KeyEvent.VK_A].connect(new Function() {
+		Key.released[Integer.parseInt(Data.config.getValue("Move Left"))].connect(new Function() {
 			public void call() {
 				left = false;
 				moveLeft.remove(Character.this.body);
 			}
 		});
-		Key.released[KeyEvent.VK_W].connect(new Function() {
+		Key.released[Integer.parseInt(Data.config.getValue("Jump"))].connect(new Function() {
 			public void call() {
 				jumping = false;
 			}

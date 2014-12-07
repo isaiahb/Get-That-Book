@@ -8,6 +8,7 @@ import com.wicgames.wicLibrary.Event;
 
 public abstract class Key {
 	public static Event typed = new Event();
+	public static Event typedEvent = new Event();
 	public static Event[] pressed = new Event[127];
 	public static Event[] released = new Event[127];
 	public static boolean[] down = new boolean[127];
@@ -25,6 +26,7 @@ public abstract class Key {
 			int code = event.getKeyCode();
 			pressed[code].trigger();
 			down[code] = true;
+			typedEvent.trigger(event);
 		}
 		@Override
 		public void keyReleased(KeyEvent event) {
