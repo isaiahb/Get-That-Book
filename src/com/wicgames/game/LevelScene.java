@@ -20,7 +20,7 @@ public class LevelScene extends Scene {
 	public Data textureData;
 	public SpriteSheet textures;
 	private Character player;
-	private Force gravity = new Force.Gravity(0, 300);
+	private Force gravity = new Force.Gravity(0, 550);
 	public void init() {
 		loadLevel("bin/assets/data/levels/" + levelName);
 		player = new Character();

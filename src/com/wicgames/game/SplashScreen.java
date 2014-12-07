@@ -7,19 +7,20 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.wicgames.wicLibrary.Animation;
+import com.wicgames.wicLibrary.Drawable;
+import com.wicgames.wicLibrary.SpriteSheet;
 import com.wicgames.window.Scene;
 
-public class SplashScreen extends Scene {
+public class SplashScreen extends Scene implements Drawable{
 	public Image splash;
 	private double timeElapsed;
-	private double showTime = 0.5;
+	private double showTime = 2;
 	public SplashScreen() {
 		super();
-		try {
-			splash = ImageIO.read(new File("bin/assets/textures/WIC.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		SpriteSheet animate = new SpriteSheet("bin/assets/textures/WIC64.png",64,64,1,0);
+		splash = animate.getImage(0);
+		new Animation(animate, 0, 3, this, 0.1, -1);
 	}
 
 	@Override
@@ -40,4 +41,9 @@ public class SplashScreen extends Scene {
 
 	@Override
 	public void init() {}
+
+	@Override
+	public void updateImage(Image texture) {
+		splash = texture;
+	}
 }
