@@ -20,7 +20,7 @@ public class SplashScreen extends Scene implements Drawable{
 		super();
 		SpriteSheet animate = new SpriteSheet("bin/assets/textures/WIC64.png",64,64,1,0);
 		splash = animate.getImage(0);
-		new Animation(animate, 0, 3, this, 0.1, -1);
+		new Animation(animate, 1, 1, this, 0.2, -1);
 	}
 
 	@Override
