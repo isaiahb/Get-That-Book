@@ -1,5 +1,6 @@
 package com.wicgames.wicLibrary;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -32,9 +33,7 @@ public class SpriteSheet {
 		}
 		this.borderSize = borderSize;
 		this.offset = offset;
-		System.out.println(sheet.getWidth(null));
 		numSprites = new Vector2((sheet.getWidth(null) - offset) / (spriteSize.x + borderSize), (sheet.getHeight(null) - offset) / (spriteSize.y + borderSize));
-		System.out.println(numSprites + "NUMSPRITES");
 		sprites = new BufferedImage[x][y];
 		System.out.println(spriteSize.x + borderSize);
 		loadSprites();
@@ -54,12 +53,15 @@ public class SpriteSheet {
 		System.out.println(x + "X" + y);
 		if(x > numSprites.x || y > numSprites.y) throw new ArrayIndexOutOfBoundsException(); //Trying to get sprite outside of sprite sheet
 		Vector2 spritePosition = new Vector2(x * spriteSize.x + offset,y * spriteSize.y + offset); //Gets position of sprite on sprite sheet
-		System.out.println(spritePosition);
-		BufferedImage sprite = (BufferedImage) Main.frame.createImage((int)spriteSize.x,(int)spriteSize.y); //Creates new image to hold sprite
+		BufferedImage sprite = new BufferedImage((int)spriteSize.x,(int)spriteSize.y,BufferedImage.TYPE_4BYTE_ABGR); //Creates new image to hold sprite
 		for(int xPos = 0;xPos < spriteSize.x;xPos++) 
 			for(int yPos = 0;yPos < spriteSize.y;yPos++){
 				//Copy's Pixels from sprite sheet to sprite image
-				sprite.setRGB(xPos, yPos, sheet.getRGB((int)(xPos + spritePosition.x + x*borderSize),(int)(yPos + spritePosition.y + y*borderSize)));
+				int rgb = sheet.getRGB((int)(xPos + spritePosition.x + x*borderSize),(int)(yPos + spritePosition.y + y*borderSize));
+				if(rgb != -16777216)
+					sprite.setRGB(xPos, yPos, rgb);
+				else
+					sprite.setRGB(xPos, yPos,16777216);
 			}
 		return sprite;
 	}

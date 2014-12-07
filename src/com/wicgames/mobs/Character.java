@@ -2,6 +2,8 @@ package com.wicgames.mobs;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,24 +17,32 @@ import com.wicgames.physics.Body;
 import com.wicgames.physics.Force;
 import com.wicgames.physics.Material;
 import com.wicgames.physics.Rectangle;
+import com.wicgames.wicLibrary.Animation;
 import com.wicgames.wicLibrary.Function;
+import com.wicgames.wicLibrary.ImageMethods;
+import com.wicgames.wicLibrary.SpriteSheet;
 import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Scene;
 
 public class Character extends Mob {
+	public static SpriteSheet walkingSheet;
 	private Force moveLeft = new Force.Gravity(-400, 0);
 	private Force moveRight = new Force.Gravity(400, 0);
-
+	private Animation walking;
 	public Character() {
+		if(walkingSheet == null)
+			walkingSheet = new SpriteSheet("bin/assets/textures/CharacterWalking.png",22,64,2,1);
+		walking = new Animation(walkingSheet,0,5,this,0.15,-1);
 		health = 100;
 		armour = 10;
 		damageBoost = 2;
-		jumpThreshold = 0.032;
+		jumpThreshold = 0.036;
 		Key.pressed[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
 				right = true;
 				if (!moveRight.bodies.contains(Character.this.body))
 					moveRight.add(Character.this.body);
+				walking.start();
 			}
 		});
 		Key.pressed[Integer.parseInt(Data.config.getValue("Move Left"))].connect(new Function() {
@@ -46,6 +56,7 @@ public class Character extends Mob {
 			public void call() {
 				right = false;
 				moveRight.remove(Character.this.body);
+				walking.stop();
 			}
 		});
 		Key.released[Integer.parseInt(Data.config.getValue("Move Left"))].connect(new Function() {
@@ -101,9 +112,11 @@ public class Character extends Mob {
 		offset.y = body.position.y > mid.y ? offset.y : 0;
 		offset.y = body.position.y < sceneSize.y - mid.y ? offset.y : sceneSize.y - mid.y * 2;
 		Vector2 p = Vector2.sub(body.position, offset);
-		
-		if (texture != null)
-			graphics2d.drawImage(texture,(int)p.x,(int)p.y,null);
+		BufferedImage flipTexture = ImageMethods.copyImage((BufferedImage)texture);
+		if(left)
+			ImageMethods.flipImage((BufferedImage) flipTexture);
+		if (flipTexture != null)
+			graphics2d.drawImage(flipTexture,(int)p.x,(int)p.y,null);
 		else{
 			graphics2d.setColor(Color.PINK);
 	        graphics2d.fillRect((int)p.x,(int)p.y,(int)p.x, (int) p.y);
