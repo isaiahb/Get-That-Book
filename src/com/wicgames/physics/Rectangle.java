@@ -55,4 +55,12 @@ public class Rectangle extends Body {
 	//Draws All Rectangles
 	public static void drawAll(Graphics2D graphics2D) {
 	}
+
+	@Override
+	public boolean onTop() {
+		for(Body b : touching)
+			if(position.y + size.y <= b.position.y + 20)
+				return true;
+		return false;
+	}
 }

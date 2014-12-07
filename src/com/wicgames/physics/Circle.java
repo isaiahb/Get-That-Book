@@ -65,4 +65,14 @@ public class Circle extends Body {
 			circle.draw(graphics2D);
 		}
 	}
+
+
+
+	@Override
+	public boolean onTop() {
+		for(Body b : touching)
+			if(center().y + size.y / 2  <= b.position.y)
+				return true;
+		return false;
+	}
 }
