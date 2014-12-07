@@ -16,7 +16,11 @@ public class OptionMenu extends Scene{
 	@Override
 	public void init() {
 		String[] res = {"3840x2160","2560x1440","1920x1080","1280x720","960x540","640x360","480x270"};
+		String currentResolution = String.valueOf(Main.panel.getWidth()) + "x" + String.valueOf(Main.panel.getHeight()); 
 		JComboBox<String> resolutions = new JComboBox<String>(res);
+		for(String resol : res)
+			if(currentResolution.equals(resol))
+				resolutions.setSelectedItem(resol);
 		resolutions.setBounds((int)(Main.WIDTH * 0.1 * Main.scale),(int)(Main.HEIGHT * 0.1 * Main.scale),(int)(100 * Main.scale),(int)(50 * Main.scale));
 		Button save = new Button("bin/assets/textures/SaveButton.png",(int)(Main.WIDTH * 0.75),(int)(Main.HEIGHT * 0.75));
 		save.addActionListener((e) ->{
