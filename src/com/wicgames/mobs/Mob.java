@@ -15,7 +15,7 @@ public abstract class Mob extends GameObject{
     protected boolean right;
     protected boolean up;
     protected boolean down;
-    protected boolean jumping;
+    protected boolean jumpRequest;
     protected boolean falling;
     
 	protected double jumpCall;

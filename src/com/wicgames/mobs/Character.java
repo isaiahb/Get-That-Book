@@ -46,12 +46,6 @@ public class Character extends Mob {
 					moveLeft.add(Character.this.body);
 			}
 		});
-		Key.pressed[Integer.parseInt(Data.config.getValue("Jump"))].connect(new Function() {
-			public void call() {
-				jumping = true;
-				jumpCall = 0;
-			}
-		});
 		Key.released[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
 				right = false;
@@ -64,9 +58,10 @@ public class Character extends Mob {
 				moveLeft.remove(Character.this.body);
 			}
 		});
-		Key.released[Integer.parseInt(Data.config.getValue("Jump"))].connect(new Function() {
+		Key.pressed[Integer.parseInt(Data.config.getValue("Jump"))].connect(new Function() {
 			public void call() {
-				jumping = false;
+				jumpRequest = true;
+				jumpCall = 0;
 			}
 		});
 		try {
@@ -79,7 +74,6 @@ public class Character extends Mob {
 			@Override
 			public void update(double delta) {
 				super.update(delta);
-				System.out.println(velocity.y);
 				velocity.x = Math.copySign(Math.max(Math.abs(velocity.x) - 8,0), velocity.x);
 				velocity.y = Math.copySign(Math.max(Math.abs(velocity.y) - 8,0), velocity.y);
 				velocity.x = Utils.clamp(-1000, velocity.x, 1000);
@@ -94,6 +88,7 @@ public class Character extends Mob {
 				offset.y = position.y > mid.y ? offset.y : 0;
 				offset.y = position.y < Scene.currentScene.size.y - mid.y ? offset.y : sceneSize.y - mid.y * 2;
 				Scene.currentScene.camera.setTo(offset);
+				Character.this.update(delta);
 			}
 		};
 		body.setMaterial(Material.Flesh);
@@ -122,6 +117,12 @@ public class Character extends Mob {
 		}
 	}
 	public void update(double delta) {
-		
+		jumpCall += delta;
+		if(jumpCall > jumpThreshold){//Jumprequest expired
+			jumpRequest = false;
+		}
+		if(jumpRequest && body.onTop())
+			body.velocity.y += -500;
+			
 	}
 }

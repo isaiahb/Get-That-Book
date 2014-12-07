@@ -135,7 +135,7 @@ public abstract class Body {
 			bodies.get(i).draw(graphics2D);
 		}
 	}
-	
+	public abstract boolean onTop();
 	///////////////////////////////////////
 	//		Orientation functions 		///
 	///////////////////////////////////////
