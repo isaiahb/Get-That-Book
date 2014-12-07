@@ -135,7 +135,10 @@ public abstract class Body {
 			bodies.get(i).draw(graphics2D);
 		}
 	}
-	public abstract boolean onTop();
+	public abstract boolean onTop(Body b);
+	public abstract boolean leftOf(Body b);
+	public abstract boolean rightOf(Body b);
+	public boolean besideOf(Body b){return leftOf(b) || rightOf(b);}
 	///////////////////////////////////////
 	//		Orientation functions 		///
 	///////////////////////////////////////
