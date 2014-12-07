@@ -12,7 +12,7 @@ import com.wicgames.window.Scene;
 
 public class Main {
 	public static final String title = "Get That Book";
-	public static final int FPS = 60;
+	public static final int FPS = 200;
 	public static final int WIDTH = 960;
 	public static final int HEIGHT = 540;
 	public static final Vector2 HALF = new Vector2(WIDTH/2, HEIGHT/2);
