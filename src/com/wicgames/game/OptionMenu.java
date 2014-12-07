@@ -33,6 +33,11 @@ public class OptionMenu extends Scene{
 		Button save = new Button("bin/assets/textures/SaveButton.png",(int)(Main.WIDTH * 0.75),(int)(Main.HEIGHT * 0.75));
 		save.addActionListener((e) ->{
 			Data.config.setValue("scale", String.valueOf(Integer.parseInt(((String)resolutions.getSelectedItem()).split("x")[0]) / (double)Main.WIDTH));
+			try {
+				Data.config.saveData("bin/assets/data/config/config");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 			Main.frame.dispose();
 			Main.init();
 		});
@@ -79,7 +84,6 @@ public class OptionMenu extends Scene{
 			@Override
 			public <T> void call(T a) {
 				if(selectedKeyBinding != -1){
-					System.out.println(((KeyEvent)a).getKeyCode());
 					keyValues[selectedKeyBinding] = ((KeyEvent)a).getKeyCode();
 					Data.config.setValue(keyBindings[selectedKeyBinding], String.valueOf(keyValues[selectedKeyBinding]));
 				}
