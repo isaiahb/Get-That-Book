@@ -36,7 +36,7 @@ public class Character extends Mob {
 		health = 100;
 		armour = 10;
 		damageBoost = 2;
-		jumpThreshold = 0.072;
+		jumpThreshold = 0.1;
 		Key.pressed[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
 				right = true;
@@ -75,13 +75,8 @@ public class Character extends Mob {
 				jumpCall = 0;
 			}
 		});
-		try {
-			texture = ImageIO
-					.read(new File("bin/assets/textures/character.png"));
-		} catch (IOException e) {
-			System.out.println("character texture failed");
-		}
-		body = new Rectangle(50, 50, 32, 64) {
+		texture = walkingSheet.getImage(0);
+		body = new Rectangle(50, 50, texture.getWidth(null), texture.getHeight(null)) {
 			@Override
 			public void update(double delta) {
 				super.update(delta);
@@ -137,7 +132,7 @@ public class Character extends Mob {
 			body.velocity.y += -500;
 			jumpRequest = false;
 		}
-			
+		jumpThreshold = delta * 20;
 	}
 	public boolean onTopAny(){
 		for(Body b : body.touching)
