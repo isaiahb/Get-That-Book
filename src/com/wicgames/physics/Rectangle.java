@@ -58,7 +58,7 @@ public class Rectangle extends Body {
 
 	@Override
 	public boolean onTop(Body b) {
-		if(position.y + size.y - 3 <= b.position.y + 3)
+		if(position.y + size.y - 6 <= b.position.y + 6)
 				return true;
 		return false;
 	}

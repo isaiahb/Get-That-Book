@@ -12,6 +12,7 @@ public abstract class Key {
 	public static Event[] pressed = new Event[127];
 	public static Event[] released = new Event[127];
 	public static boolean[] down = new boolean[127];
+
 	public static void init() {
 		for (int i = 0; i < pressed.length; i++) {
 			pressed[i] = new Event();
@@ -20,21 +21,25 @@ public abstract class Key {
 		Main.panel.addKeyListener(listener);
 	}
 
-	public static KeyListener listener = new KeyListener(){
+	public static KeyListener listener = new KeyListener() {
 		@Override
 		public void keyPressed(KeyEvent event) {
 			int code = event.getKeyCode();
-			if (!down[code])
+			if (!down[code]) {
 				pressed[code].trigger();
+				typedEvent.trigger(event);
+			}
 			down[code] = true;
-			typedEvent.trigger(event);
+
 		}
+
 		@Override
 		public void keyReleased(KeyEvent event) {
 			int code = event.getKeyCode();
 			released[event.getKeyCode()].trigger();
 			down[code] = false;
 		}
+
 		@Override
 		public void keyTyped(KeyEvent event) {
 			typed.trigger(event.getKeyChar());

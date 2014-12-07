@@ -36,7 +36,7 @@ public class Character extends Mob {
 		health = 100;
 		armour = 10;
 		damageBoost = 2;
-		jumpThreshold = 0.036;
+		jumpThreshold = 0.072;
 		Key.pressed[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
 				right = true;
@@ -133,8 +133,10 @@ public class Character extends Mob {
 		if(jumpCall > jumpThreshold){//Jumprequest expired
 			jumpRequest = false;
 		}
-		if(jumpRequest && onTopAny())
+		if(jumpRequest && onTopAny()){
 			body.velocity.y += -500;
+			jumpRequest = false;
+		}
 			
 	}
 	public boolean onTopAny(){
