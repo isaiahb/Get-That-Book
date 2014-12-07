@@ -8,17 +8,19 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.sun.javafx.Utils;
 import com.wicgames.game.Main;
 import com.wicgames.input.Key;
 import com.wicgames.physics.Force;
+import com.wicgames.physics.Material;
 import com.wicgames.physics.Rectangle;
 import com.wicgames.wicLibrary.Function;
 import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Scene;
 
 public class Character extends Mob {
-	private Force moveLeft = new Force.Gravity(-100, 0);
-	private Force moveRight = new Force.Gravity(100, 0);
+	private Force moveLeft = new Force.Gravity(-200, 0);
+	private Force moveRight = new Force.Gravity(200, 0);
 
 	public Character() {
 		health = 100;
@@ -76,6 +78,12 @@ public class Character extends Mob {
 			@Override
 			public void update(double delta) {
 				super.update(delta);
+				System.out.println(velocity.y);
+				velocity.x = Math.copySign(Math.abs(velocity.x) - 4, velocity.x);
+				velocity.y = Math.copySign(Math.abs(velocity.y) - 4, velocity.y);
+				velocity.x = Utils.clamp(-1000, velocity.x, 1000);
+				velocity.y = Utils.clamp(-1000, velocity.y, 1000);
+				System.out.println(velocity.y);
 				Vector2 mid = Main.HALF;
 				Vector2 offset = Vector2.sub(position, mid);
 				Vector2 sceneSize = Scene.currentScene.size;
@@ -87,7 +95,7 @@ public class Character extends Mob {
 				Scene.currentScene.camera.setTo(offset);
 			}
 		};
-		
+		body.setMaterial(Material.Flesh);
 		created(this);
 	}
 	@Override

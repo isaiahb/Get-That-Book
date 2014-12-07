@@ -1,14 +1,18 @@
 package com.wicgames.game;
 
+import java.awt.event.KeyEvent;
+
+import com.wicgames.input.Key;
 import com.wicgames.wicLibrary.Animation;
 import com.wicgames.wicLibrary.Drawable;
+import com.wicgames.wicLibrary.Function;
 import com.wicgames.wicLibrary.SpriteSheet;
 import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Button;
 import com.wicgames.window.Scene;
 
 public class LevelMenu extends Scene{
-	
+	Function goBack;
 	private Button[][] levelButtons;
 	private SpriteSheet buttons;
 	private Vector2 sheetSize;
@@ -42,7 +46,20 @@ public class LevelMenu extends Scene{
 				Scene.currentScene.drawables.add((Drawable) levelButtons[x][y]);
 			}
 		}
+		goBack = new Function(){
+			@Override
+			public void call() {
+				currentScene = new Menu();
+				currentScene.init();
+			}
+		};
+		
+		Key.released[KeyEvent.VK_BACK_SPACE].connect(goBack);
 		Main.frame.pack();
 	}
-
+	@Override
+	public void destroy() {
+		super.destroy();
+		Key.released[KeyEvent.VK_BACK_SPACE].disconnect(goBack);
+	}
 }
