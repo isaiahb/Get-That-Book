@@ -24,7 +24,8 @@ public abstract class Key {
 		@Override
 		public void keyPressed(KeyEvent event) {
 			int code = event.getKeyCode();
-			pressed[code].trigger();
+			if (!down[code])
+				pressed[code].trigger();
 			down[code] = true;
 			typedEvent.trigger(event);
 		}
