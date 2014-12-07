@@ -16,6 +16,7 @@ public class Frame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(width, height);
 		setTitle(title);
+		setResizable(false);
 		try {
 			setIconImage(ImageIO.read(new File("bin/assets/textures/WIC64.png"))); //Sets icon for frame
 		} catch (IOException e) {
