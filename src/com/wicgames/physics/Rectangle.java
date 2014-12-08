@@ -65,14 +65,14 @@ public class Rectangle extends Body {
 
 	@Override
 	public boolean leftOf(Body b) {
-		if(position.x + 1>= b.position.x + b.size.x)
+		if(position.x + 5 >= b.position.x + b.size.x)
 			return true;
 		return false;
 	}
 
 	@Override
 	public boolean rightOf(Body b) {
-		if(position.x + size.x  - 1 <= b.position.x)
+		if(position.x + size.x - 5 <= b.position.x)
 			return true;
 		return false;
 	}

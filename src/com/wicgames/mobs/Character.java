@@ -26,8 +26,16 @@ import com.wicgames.window.Scene;
 
 public class Character extends Mob {
 	public static SpriteSheet walkingSheet, idleSheet, fallingSheet, jumpingSheet;
-	private Force moveRight = new Force.Gravity(5000, 0);
-	private Force moveLeft = new Force.Gravity(-5000, 0);
+	private Force moveRight = new Force.Gravity(5000, 0){
+		public void updateForce(Body body) {
+			body.addForce(Vector2.mul(force, body.mass));
+		}
+	};
+	private Force moveLeft = new Force.Gravity(-5000, 0){
+		public void updateForce(Body body) {
+			body.addForce(Vector2.mul(force, body.mass));
+		}
+	};
 	private Animation walking, idling, falling, jumping;
 	public Character() {
 		if(walkingSheet == null)
@@ -174,6 +182,19 @@ public class Character extends Mob {
 	public boolean onTopAny(){
 		for(Body b : body.touching)
 			if(body.onTop(b) && !body.besideOf(b))
+				return true;
+		return false;
+	}
+	public boolean rightAny(){
+		for(Body b: body.touching)
+			if(body.rightOf(b)){
+				return true;
+			}
+		return false;
+	}
+	public boolean leftAny(){
+		for(Body b : body.touching)
+			if(body.leftOf(b))
 				return true;
 		return false;
 	}
