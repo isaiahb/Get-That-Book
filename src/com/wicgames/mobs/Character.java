@@ -181,7 +181,7 @@ public class Character extends Mob {
 	}
 	public boolean onTopAny(){
 		for(Body b : body.touching)
-			if(body.onTop(b) && !body.besideOf(b))
+			if(body.onTop(b))
 				return true;
 		return false;
 	}
