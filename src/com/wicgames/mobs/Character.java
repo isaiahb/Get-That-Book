@@ -36,9 +36,12 @@ public class Character extends Mob {
 			idleSheet = new SpriteSheet("bin/assets/textures/CharacterIdol.png",22,64,2,1);
 		if(fallingSheet == null)
 			fallingSheet = new SpriteSheet("bin/assets/textures/FallingSheet.png",22,64,2,1);
+		if(jumpingSheet == null)
+			jumpingSheet = new SpriteSheet("bin/assets/textures/CharacterJumping.png",22,64,2,1);
 		falling = new Animation(fallingSheet,0,1,this,0.1,-1,idleSheet.getImage(0));
 		walking = new Animation(walkingSheet,0,5,this,0.1,-1,idleSheet.getImage(0));
 		idling = new Animation(idleSheet,0,9,this,0.1,-1,idleSheet.getImage(0));
+		jumping = new Animation(jumpingSheet,0,1,this,0.1,1,jumpingSheet.getImage(1));
 		idling.start();
 		health = 100;
 		armour = 10;
@@ -82,6 +85,7 @@ public class Character extends Mob {
 			public void update(double delta) {
 				super.update(delta);
 				velocity.x = Math.copySign(Math.max(Math.abs(velocity.x) - 8,0), velocity.x);
+				velocity.x = Math.copySign(Math.max(Math.abs(velocity.x) - 1,0), velocity.x);
 				velocity.x = Utils.clamp(-100,velocity.x,100);
 				Vector2 mid = Main.HALF;
 				Vector2 offset = Vector2.sub(position, mid);
@@ -129,6 +133,7 @@ public class Character extends Mob {
 		}
 		if(jumpRequest && onTopAny()){
 			body.velocity.y += -400;
+			jumping.start();
 			jumpRequest = false;
 		}
 		jumpThreshold = delta * 20;
@@ -136,6 +141,15 @@ public class Character extends Mob {
 		if(body.velocity.y > 30){
 			if(!falling.isRunning())
 				falling.start();
+			if(idling.isRunning())
+				idling.stop();
+			if(walking.isRunning())
+				walking.stop();
+			if(jumping.isRunning())
+				jumping.stop();
+		}else if(body.velocity.y < -20){
+			if(falling.isRunning())
+				falling.stop();
 			if(idling.isRunning())
 				idling.stop();
 			if(walking.isRunning())

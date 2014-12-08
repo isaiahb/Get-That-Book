@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Animation {
 	public static ArrayList<Animation> all = new ArrayList<Animation>();
+	public Event finished = new Event();
 	private SpriteSheet animations;
 	private Drawable animated;
 	private double frameDelay;
@@ -16,6 +17,7 @@ public class Animation {
 	private int startIndex;
 	private int endIndex;
 	private int loopNumber;
+	private int fullLoopNumber;
 	private boolean running = false;
 	private Image stopImage;
 	/**
@@ -42,7 +44,7 @@ public class Animation {
 		this.endIndex = startIndex + nSprites - 1;
 		this.frameDelay = frameDelay;
 		this.animated = texture;
-		this.loopNumber = loopNumber;
+		fullLoopNumber = loopNumber;
 		this.currentTime = 0;
 		this.currentIndex = startIndex;
 		this.stopImage = stopImage;
@@ -71,7 +73,9 @@ public class Animation {
 			currentIndex = startIndex - 1;
 			loopNumber--;
 			if (loopNumber == 0) {
-				destroy();
+				System.out.println("DONE");
+				finished.trigger();
+				stop();
 			}
 		}
 	}
@@ -91,6 +95,7 @@ public class Animation {
 
 	public void start() {
 		running = true;
+		loopNumber = fullLoopNumber;
 	}
 
 	public void pause() {
