@@ -73,7 +73,7 @@ public class Animation {
 			currentIndex = startIndex - 1;
 			loopNumber--;
 			if (loopNumber == 0) {
-				System.out.println("DONE");
+				//Done animation
 				finished.trigger();
 				stop();
 			}

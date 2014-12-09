@@ -1,14 +1,11 @@
 package com.wicgames.wicLibrary;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
-import com.wicgames.game.Main;
 
 public class SpriteSheet {
 	private Vector2 spriteSize; //Size of a single sprite in sprite sheet
@@ -17,6 +14,7 @@ public class SpriteSheet {
 	private BufferedImage[][] sprites; //Two-D array holding sprites
 	private int borderSize; //Size of border around sprites in sprite sheet
 	private int offset;
+	private int numSpritesTotal = 0;
 	/**
 	 * Creates sprite sheet , splits image into sprites
 	 * @param x Width of sprite
@@ -35,11 +33,14 @@ public class SpriteSheet {
 		this.offset = offset;
 		numSprites = new Vector2((sheet.getWidth(null) - offset) / (spriteSize.x + borderSize), (sheet.getHeight(null) - offset) / (spriteSize.y + borderSize));
 		sprites = new BufferedImage[x][y];
-		System.out.println(spriteSize.x + borderSize);
 		loadSprites();
 	}
 	public Vector2 getNumSprites() {
 		return numSprites.copy();
+	}
+	
+	public int getNumSpritesTotal() {
+		return numSpritesTotal;
 	}
 	/**
 	 * Gets sprite at x,y from sprite sheet
@@ -49,8 +50,7 @@ public class SpriteSheet {
 	 * 
 	 */
 	private BufferedImage getSprite(int x, int y){
-		System.out.println(offset);
-		System.out.println(x + "X" + y);
+		
 		if(x > numSprites.x || y > numSprites.y) throw new ArrayIndexOutOfBoundsException(); //Trying to get sprite outside of sprite sheet
 		Vector2 spritePosition = new Vector2(x * spriteSize.x + offset,y * spriteSize.y + offset); //Gets position of sprite on sprite sheet
 		BufferedImage sprite = new BufferedImage((int)spriteSize.x,(int)spriteSize.y,BufferedImage.TYPE_4BYTE_ABGR); //Creates new image to hold sprite
@@ -60,6 +60,7 @@ public class SpriteSheet {
 				int rgb = sheet.getRGB((int)(xPos + spritePosition.x + x*borderSize),(int)(yPos + spritePosition.y + y*borderSize));
 				sprite.setRGB(xPos, yPos, rgb);
 			}
+		numSpritesTotal++;
 		return sprite;
 	}
 	/**
