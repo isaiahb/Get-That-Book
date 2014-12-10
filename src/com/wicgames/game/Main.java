@@ -3,6 +3,9 @@ package com.wicgames.game;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import com.wicgames.input.Key;
 import com.wicgames.wicLibrary.Function;
 import com.wicgames.wicLibrary.Vector2;

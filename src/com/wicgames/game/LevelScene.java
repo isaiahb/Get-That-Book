@@ -34,5 +34,7 @@ public class LevelScene extends Scene {
 		super.update(delta);
 		
 	}
-	
+	public void finishLevel(){
+		
+	}
 }

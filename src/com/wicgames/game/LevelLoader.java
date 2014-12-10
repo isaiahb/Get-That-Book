@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import com.wicgames.gameObjects.GameObject;
+import com.wicgames.gameObjects.LevelEnd;
 import com.wicgames.gameObjects.Scenery;
 import com.wicgames.physics.Material;
 import com.wicgames.physics.Rectangle;
@@ -49,10 +50,15 @@ public class LevelLoader {
 				y++;
 			}
 			while(levelReader.ready()){
-				
+				String[] objectInfo = levelReader.readLine().split(" ");
+				switch(Integer.parseInt(objectInfo[0])){
+				case 0: //Level End
+					new LevelEnd(Integer.parseInt(objectInfo[1]),Integer.parseInt(objectInfo[2]));
+					break;
+				}
 			}
 			levelReader.close();
-			BufferedReader hitboxReader = new BufferedReader(new FileReader(path + "hitmap"));//TODO wont work above level ten
+			BufferedReader hitboxReader = new BufferedReader(new FileReader(path + "hitmap"));
 			while(hitboxReader.ready()){
 				String[] rectangle = hitboxReader.readLine().split(" ");
 				Rectangle hitbox = new Rectangle(Integer.parseInt(rectangle[0]) * GameObject.tileSize,Integer.parseInt(rectangle[1]) * GameObject.tileSize,Integer.parseInt(rectangle[2]) * GameObject.tileSize,Integer.parseInt(rectangle[3]) * GameObject.tileSize);

@@ -26,6 +26,7 @@ import com.wicgames.window.Scene;
 
 public class Character extends Mob {
 	public static SpriteSheet walkingSheet, idleSheet, fallingSheet, jumpingSheet;
+	public static Class hitbox;
 	public void respawn(double x, double y) {
 		body.position.setTo(x, y + body.size.y/Main.scale);
 		health = 1;
@@ -112,6 +113,7 @@ public class Character extends Mob {
 				Character.this.update(delta);
 			}
 		};
+		hitbox = body.getClass();
 		body.setMaterial(Material.Flesh);
 		created(this);
 	}
