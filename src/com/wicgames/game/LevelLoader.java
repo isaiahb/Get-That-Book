@@ -9,6 +9,7 @@ import com.wicgames.gameObjects.Scenery;
 import com.wicgames.physics.Material;
 import com.wicgames.physics.Rectangle;
 import com.wicgames.wicLibrary.SpriteSheet;
+import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Scene;
 
 public class LevelLoader {
@@ -16,16 +17,19 @@ public class LevelLoader {
 	 * Loads level from file at path
 	 * @param path Location of level file
 	 */
-	public static void loadLevel(String path){
+	public static void loadLevel(String path,Vector2 spawn){
 		Scene currentLevel = Scene.currentScene;
 		int levelNumber = Integer.parseInt(currentLevel.name.substring(5, currentLevel.name.length()));
 		try {
 			int x = 0,y = 0; //X,Y of tile
 			BufferedReader levelReader = new BufferedReader(new FileReader(path));
 			Data textureData = new Data(path + "text");
-			currentLevel.spawn.x = Integer.parseInt(textureData.getValue("spawnx"));
-			currentLevel.spawn.y = Integer.parseInt(textureData.getValue("spawny"));
+			System.out.println(path + "text");
+
 			currentLevel.textures = new SpriteSheet(textureData.getValue("spritesheet"), Integer.parseInt(textureData.getValue("x")), Integer.parseInt(textureData.getValue("y")), Integer.parseInt(textureData.getValue("border")),0);
+			String spawnx = (textureData.getValue("spawnx"));
+			String spawny = (textureData.getValue("spawny"));
+			spawn.setTo(Integer.parseInt(spawnx), Integer.parseInt(spawny));
 			
 			LevelReader:
 			while(levelReader.ready()){

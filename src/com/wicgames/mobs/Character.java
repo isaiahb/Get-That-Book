@@ -27,7 +27,7 @@ import com.wicgames.window.Scene;
 public class Character extends Mob {
 	public static SpriteSheet walkingSheet, idleSheet, fallingSheet, jumpingSheet;
 	public void respawn(double x, double y) {
-		body.position.setTo(x, y + body.size.y);
+		body.position.setTo(x, y + body.size.y/Main.scale);
 		health = 1;
 	}
 	private Force moveRight = new Force.Gravity(5000, 0){

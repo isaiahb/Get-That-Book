@@ -14,7 +14,7 @@ public class LevelScene extends Scene {
 	public Vector2 spawn = new Vector2();
 	
 	public void init() {
-		LevelLoader.loadLevel("bin/assets/data/levels/" + name);
+		LevelLoader.loadLevel("bin/assets/data/levels/" + name, spawn);
 		player = new Character();
 		gravity.add(player.body);
 		forces.add(gravity);
