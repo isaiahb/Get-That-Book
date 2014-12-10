@@ -35,6 +35,6 @@ public class LevelScene extends Scene {
 		
 	}
 	public void finishLevel(){
-		
+		System.out.println("DOne");
 	}
 }

@@ -1,5 +1,10 @@
 package com.wicgames.gameObjects;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import com.wicgames.game.LevelScene;
 import com.wicgames.mobs.Character;
 import com.wicgames.physics.Body;
@@ -17,7 +22,13 @@ public class LevelEnd extends GameObject{
 					if(body.getClass().equals(Character.hitbox))((LevelScene)Scene.currentScene).finishLevel();
 			}
 		};
+		try {
+			texture = ImageIO.read(new File("bin/assets/textures/EndDoor.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		body.setMaterial(Material.Static);
+		body.canCollide = false;
 		created(this);
 	}
 }
