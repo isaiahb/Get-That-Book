@@ -26,6 +26,10 @@ import com.wicgames.window.Scene;
 
 public class Character extends Mob {
 	public static SpriteSheet walkingSheet, idleSheet, fallingSheet, jumpingSheet;
+	public void respawn(double x, double y) {
+		body.position.setTo(x, y + body.size.y);
+		health = 1;
+	}
 	private Force moveRight = new Force.Gravity(5000, 0){
 		public void updateForce(Body body) {
 			body.addForce(Vector2.mul(force, body.mass));
@@ -55,6 +59,7 @@ public class Character extends Mob {
 		armour = 10;
 		damageBoost = 2;
 		jumpThreshold = 0.1;
+		
 		Key.pressed[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
 				right = true;
@@ -110,6 +115,8 @@ public class Character extends Mob {
 		body.setMaterial(Material.Flesh);
 		created(this);
 	}
+	
+	//Draw
 	@Override
 	public void draw(Graphics2D graphics2d) {
 		Vector2 mid = Main.HALF;
@@ -134,6 +141,8 @@ public class Character extends Mob {
 	        graphics2d.drawRect((int)p.x,(int)p.y,(int)p.x, (int) p.y);
 		}
 	}
+	
+	//Update 
 	public void update(double delta) {
 		jumpCall += delta;
 		if(jumpCall > jumpThreshold){//Jumprequest expired

@@ -3,6 +3,7 @@ package com.wicgames.window;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import com.wicgames.game.Data;
 import com.wicgames.game.Main;
 import com.wicgames.gameObjects.GameObject;
 import com.wicgames.physics.Body;
@@ -13,6 +14,7 @@ import com.wicgames.physics.Force;
 import com.wicgames.physics.Manifold;
 import com.wicgames.wicLibrary.Animation;
 import com.wicgames.wicLibrary.Drawable;
+import com.wicgames.wicLibrary.SpriteSheet;
 import com.wicgames.wicLibrary.Vector2;
 
 public abstract class Scene {
@@ -24,6 +26,12 @@ public abstract class Scene {
 	public ArrayList<Body> bodies = new ArrayList<Body>();				//Holds all the bodies in the scene
 	public ArrayList<Force> forces = new ArrayList<Force>();
 	public ArrayList<Constraint> constraints = new ArrayList<Constraint>();
+	
+	//Variables mostly used by the LevelScene
+	public String name;
+	public Vector2 spawn;
+	public SpriteSheet textures;
+	
 	public Scene() {
 		// Constructor for the scene, calls the  destroy method on the last scene when creating a new scene
 		if (Scene.currentScene != null)

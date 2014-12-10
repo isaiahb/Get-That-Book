@@ -2,9 +2,9 @@ spritesheet:bin/assets/textures/Making Textures.png
 x:32
 y:32
 sizex:30
-sizey:27
-spawnx:32
-spawny:576
+sizey:22
+spawnx:512.0
+spawny:256.0
 border:1
 sky:0
 invisible:=

@@ -6,7 +6,7 @@ import java.awt.*;
 
 public abstract class Mob extends GameObject{
 	//Mob stuff
-    public int health;
+    public double health;
     public int armour;
     public int damageBoost;
     
