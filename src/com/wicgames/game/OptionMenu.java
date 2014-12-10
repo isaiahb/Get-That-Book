@@ -38,6 +38,8 @@ public class OptionMenu extends Scene{
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
+			Main.panel.loop.interrupt();
+			System.out.println(Main.panel.loop.getState());
 			Main.frame.dispose();
 			Main.init();
 		});

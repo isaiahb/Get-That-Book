@@ -12,7 +12,7 @@ import com.wicgames.game.Main;
 public class Panel extends JPanel implements Runnable{
 	public boolean running = false;
 	private long last;
-	private Thread loop;
+	public Thread loop;
 	
 	public Panel(JFrame frame) {
 		setFocusable(true);
@@ -27,6 +27,7 @@ public class Panel extends JPanel implements Runnable{
 		
 	}
 	
+
 	public void pause() {
 		running  = false;
 	}
@@ -37,9 +38,10 @@ public class Panel extends JPanel implements Runnable{
 	public void run(){
 		last = System.nanoTime();
 		double delta;
-		while (true) {
+		ThreadLoop:
+		while (!Thread.interrupted()) {
 			
-			while (running) {
+			while (running && !Thread.interrupted()) {
 				double timeTaken = (double)(System.nanoTime() - last);
 				last = System.nanoTime();
 				delta = timeTaken/1000000000.00;
@@ -49,14 +51,14 @@ public class Panel extends JPanel implements Runnable{
 				try {
 					Thread.sleep((long) (1000.0/Main.FPS));
 				} 
-				catch (Exception e) {}	
+				catch (InterruptedException e) {break ThreadLoop;}	
 			}
 			System.out.println("Paused, press 'p' to unpause");
 			//Wait before checking if its running again
 			try {
 				Thread.sleep((long) (1000.0/Main.FPS));
 			} 
-			catch (Exception e) {}
+			catch (InterruptedException e) {break ThreadLoop;}
 		}
 	}
 	
