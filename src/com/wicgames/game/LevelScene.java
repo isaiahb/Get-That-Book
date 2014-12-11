@@ -35,6 +35,9 @@ public class LevelScene extends Scene {
 		
 	}
 	public void finishLevel(){
-		System.out.println("DOne");
+		if(Integer.parseInt(name.substring(5, name.length())) == Integer.parseInt(Data.save.getValue("currentLevel")))
+			Data.save.setValue("currentLevel",String.valueOf(Integer.parseInt(name.substring(5, name.length())) + 1));
+		currentScene = new LevelScene(Integer.parseInt(Data.save.getValue("currentLevel")));
+		currentScene.init();
 	}
 }

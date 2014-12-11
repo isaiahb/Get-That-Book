@@ -14,7 +14,7 @@ import com.wicgames.window.Scene;
 
 public class LevelEnd extends GameObject{
 	public LevelEnd(int x,int y){
-		body = new Rectangle(x * tileSize,y * tileSize,64,64){
+		body = new Rectangle(x,y,64,64){
 			@Override
 			public void hit(Body body) {
 				super.hit(body);
@@ -28,7 +28,6 @@ public class LevelEnd extends GameObject{
 			e.printStackTrace();
 		}
 		body.setMaterial(Material.Static);
-		body.canCollide = false;
 		created(this);
 	}
 }

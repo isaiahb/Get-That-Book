@@ -36,7 +36,6 @@ public class Main {
 		Key.init();		//Initializes Key Class
 		Key.typed.connect(new Function(){
 			public <T>void call(T c) {
-				System.out.println(c);
 				if ((char)c == 'p') {
 					if (panel.running)
 						panel.pause();
