@@ -73,5 +73,6 @@ public class LevelLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Light.generateLightMap((int)currentLevel.size.x,(int)currentLevel.size.y);
 	}
 }

@@ -28,6 +28,7 @@ public class LevelScene extends Scene {
 		graphics2D.setColor(new Color(110, 200, 235));
 		graphics2D.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
 		super.draw(graphics2D);
+		Light.drawLightMap(graphics2D);
 	}
 
 	public void update(double delta) {
