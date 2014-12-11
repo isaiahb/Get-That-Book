@@ -30,7 +30,7 @@ public abstract class CollisionDetection {
 
 	//Narrow Phase
 	//Rectangle, Rectangle
-	static void detect(Rectangle a, Rectangle b) {
+	public static void detect(Rectangle a, Rectangle b) {
 		
 		Vector2 minA, minB, maxA, maxB;
 		minA = a.position;	maxA = Vector2.add(minA,a.size);
