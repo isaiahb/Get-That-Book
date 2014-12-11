@@ -15,7 +15,7 @@ import com.wicgames.window.Scene;
 public class SplashScreen extends Scene implements Drawable{
 	public Image splash;
 	private double timeElapsed;
-	private double showTime = 0.1;
+	private double showTime = 2;
 	private Animation candle;
 	public SplashScreen() {
 		super();

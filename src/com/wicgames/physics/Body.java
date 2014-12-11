@@ -41,7 +41,7 @@ public abstract class Body {
 	public int radius;
 	public Color color = new Color(50,150,250);
 	public boolean canCollide = true;
-	
+	public boolean affectedGravity = true;
 	public abstract void draw(Graphics2D graphics2D);
 	public abstract double getArea();
 	public abstract void setInertia();

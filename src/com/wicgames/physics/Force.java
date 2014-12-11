@@ -54,7 +54,8 @@ public class Force {
 		}
 		
 		public void updateForce(Body body) {
-			body.addForce(Vector2.mul(force, body.mass));
+			if(body.affectedGravity)
+				body.addForce(Vector2.mul(force, body.mass));
 		}
 		
 	}

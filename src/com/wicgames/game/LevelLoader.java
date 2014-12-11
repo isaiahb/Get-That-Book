@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import com.wicgames.gameObjects.GameObject;
 import com.wicgames.gameObjects.LevelEnd;
+import com.wicgames.gameObjects.PushPlatform;
 import com.wicgames.gameObjects.Scenery;
 import com.wicgames.physics.Material;
 import com.wicgames.physics.Rectangle;
@@ -55,6 +56,9 @@ public class LevelLoader {
 				case 0: //Level End
 					new LevelEnd(Integer.parseInt(objectInfo[1]),Integer.parseInt(objectInfo[2]));
 					break;
+				case 1: //Wierd Isaiah Tiles
+					new PushPlatform(Integer.parseInt(objectInfo[1]), Integer.parseInt(objectInfo[2]), Integer.parseInt(objectInfo[3]), Integer.parseInt(objectInfo[4]), currentLevel.textures.getImage(Integer.parseInt(objectInfo[5])));
+					break;
 				}
 			}
 			levelReader.close();
@@ -64,7 +68,6 @@ public class LevelLoader {
 				Rectangle hitbox = new Rectangle(Integer.parseInt(rectangle[0]) * GameObject.tileSize,Integer.parseInt(rectangle[1]) * GameObject.tileSize,Integer.parseInt(rectangle[2]) * GameObject.tileSize,Integer.parseInt(rectangle[3]) * GameObject.tileSize);
 				currentLevel.bodies.add(hitbox);
 				hitbox.setMaterial(Material.Static);
-				
 			}
 			hitboxReader.close();
 		} catch (IOException e) {
