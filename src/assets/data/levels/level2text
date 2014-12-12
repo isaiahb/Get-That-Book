@@ -3,8 +3,8 @@ x:32
 y:32
 border:1
 sky:0
-spawnx:160
-spawny:416
+spawnx:448
+spawny:512
 sizex:50
 sizey:51
 0:-1
@@ -12,3 +12,4 @@ sizey:51
 4:3
 8:7
 J:25
+1:0
