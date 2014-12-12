@@ -9,10 +9,11 @@ import com.wicgames.wicLibrary.SpriteSheet;
 import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Scene;
 public class LevelScene extends Scene {
+	public static LevelScene currentLevel;
 	public Character player;
 	public Force gravity = new Force.Gravity(0, 550);
 	public Vector2 spawn = new Vector2();
-	
+	public boolean[][] solid;
 	public void init() {
 		LevelLoader.loadLevel("bin/assets/data/levels/" + name, spawn);
 		player = new Character();
@@ -21,6 +22,7 @@ public class LevelScene extends Scene {
 		player.respawn(spawn.x, spawn.y);
 	}
 	public LevelScene(int level){
+		currentLevel = this;
 		name = "level" + level; //Name of level file
 	}
 	@Override

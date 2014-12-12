@@ -32,7 +32,8 @@ public class LevelLoader {
 			String spawnx = (textureData.getValue("spawnx"));
 			String spawny = (textureData.getValue("spawny"));
 			spawn.setTo(Integer.parseInt(spawnx), Integer.parseInt(spawny));
-			
+			((LevelScene)Scene.currentScene).solid = new boolean[Integer.parseInt(textureData.getValue("sizex"))][Integer.parseInt(textureData.getValue("sizey"))];
+			boolean[][] solid = ((LevelScene)Scene.currentScene).solid;
 			LevelReader:
 			while(levelReader.ready()){
 				x = 0; //New Row set x to 0
@@ -44,6 +45,7 @@ public class LevelLoader {
 					GameObject obj;		
 					obj = new Scenery(x,y,1,1, currentLevel.textures.getImage(Integer.parseInt(textureData.getValue(String.valueOf(tile)))));
 					obj.body.setMaterial(Material.Static);
+					solid[x][y] = true;
 					currentLevel.size.x = Math.max(x * GameObject.tileSize, currentLevel.size.x);
 					currentLevel.size.y = Math.max(y * GameObject.tileSize, currentLevel.size.y);
 					x++;
@@ -85,4 +87,5 @@ public class LevelLoader {
 		}
 		Light.generateLightMap((int)currentLevel.size.x,(int)currentLevel.size.y);
 	}
+
 }

@@ -7,8 +7,6 @@ import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-import com.wicgames.gameObjects.GameObject;
-import com.wicgames.physics.Body;
 import com.wicgames.window.Scene;
 
 public class Light {
@@ -76,6 +74,7 @@ public class Light {
 			}
 		}
 	}
+	
 	public static void recursiveRay(int x,int y,short lightLevel,int xDirection,int yDirection,boolean[][] done){
 		if(lightLevel <= 0 || x < 0 || x > lightMap.length - 1 || y < 0 || y > lightMap[0].length - 1)return;
 		if(!done[x][y]){

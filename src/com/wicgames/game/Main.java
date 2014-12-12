@@ -1,8 +1,11 @@
 package com.wicgames.game;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import com.wicgames.input.Key;
+import com.wicgames.physics.Ray;
 import com.wicgames.wicLibrary.Function;
 import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Frame;
@@ -51,6 +54,8 @@ public class Main {
 		//Draws the current scene if it exists
 		if (Scene.currentScene != null)
 			Scene.currentScene.draw(graphics2D);
+		
+	
 	}
 	
 }
