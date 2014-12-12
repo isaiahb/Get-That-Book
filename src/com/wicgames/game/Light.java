@@ -2,21 +2,19 @@ package com.wicgames.game;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import com.wicgames.gameObjects.GameObject;
 import com.wicgames.physics.Body;
-import com.wicgames.physics.CollisionDetection;
-import com.wicgames.physics.CollisionResolution;
-import com.wicgames.physics.Rectangle;
-import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Scene;
 
 public class Light {
 	public static short[][] lightMap;
 	public static short[][] totalLightMap;
+	public static ArrayList<Rectangle> darkAreas = new ArrayList<Rectangle>();
 	private static Image lightFilter;
 	public static void generateLightMap(int x,int y){
 		lightMap = new short[x][y];
@@ -24,23 +22,21 @@ public class Light {
 		for (int i = 0; i < lightMap.length; i++) {
 			for (int j = 0; j < lightMap[i].length; j++) {
 				lightMap[i][j] = 0;
-				totalLightMap[i][j] = 0;
+				totalLightMap[i][j] = 255;
 			}
 		}
-		calculateSunlight();
+		calculateDarkness();
 		lightFilter = generateLightFilter();
 	}
-	public static void calculateSunlight(){
-		for(int x = 0;x < totalLightMap.length;x++){
-			Body hit = collidedHitbox(x,0,1,totalLightMap[x].length);
-			if(hit != null){
-				for(int y = 0;y < hit.position.y + hit.size.y;y++)
-					if(!(y >= totalLightMap[x].length - 1))
-					totalLightMap[x][y] = 255;
-				calculateLight(x,(int)hit.position.y,(short)255);
-			}else{
-				for(int y = 0;y < totalLightMap[0].length;y++)
-					totalLightMap[x][y] = 255;
+	public static void calculateDarkness(){
+		for(Rectangle dark : darkAreas){
+			System.out.println(dark);
+			for(int x = (int) dark.getMinX();x < dark.getMaxX();x++){
+				for(int y  = (int)dark.getMinY();y < dark.getMaxY();y++){
+					if(x > totalLightMap.length - 1)continue;
+					if(y > totalLightMap[0].length - 1)continue;
+					totalLightMap[x][y] = 0;
+				}
 			}
 		}
 	}

@@ -70,6 +70,13 @@ public class LevelLoader {
 				hitbox.setMaterial(Material.Static);
 			}
 			hitboxReader.close();
+			BufferedReader darknessReader = new BufferedReader(new FileReader(path + "darkmap"));
+			while(darknessReader.ready()){
+				String[] rectangle = darknessReader.readLine().split(" ");
+				java.awt.Rectangle darkness = new java.awt.Rectangle(Integer.parseInt(rectangle[0]) * GameObject.tileSize,Integer.parseInt(rectangle[1]) * GameObject.tileSize,Integer.parseInt(rectangle[2]) * GameObject.tileSize,Integer.parseInt(rectangle[3]) * GameObject.tileSize);
+				Light.darkAreas.add(darkness);
+			}
+			darknessReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
