@@ -59,6 +59,9 @@ public class LevelLoader {
 				case 1: //Wierd Isaiah Tiles
 					new PushPlatform(Integer.parseInt(objectInfo[1]), Integer.parseInt(objectInfo[2]), Integer.parseInt(objectInfo[3]), Integer.parseInt(objectInfo[4]), currentLevel.textures.getImage(Integer.parseInt(objectInfo[5])));
 					break;
+				case 2: //Light
+					Light.addLightSource(Integer.parseInt(objectInfo[1]), Integer.parseInt(objectInfo[2]), Short.parseShort(objectInfo[5]));
+					break;
 				}
 			}
 			levelReader.close();

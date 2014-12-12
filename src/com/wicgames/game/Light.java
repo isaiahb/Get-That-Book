@@ -15,6 +15,7 @@ public class Light {
 	public static short[][] lightMap;
 	public static short[][] totalLightMap;
 	public static ArrayList<Rectangle> darkAreas = new ArrayList<Rectangle>();
+	public static ArrayList<LightSource> lightSources = new ArrayList<LightSource>();
 	private static Image lightFilter;
 	public static void generateLightMap(int x,int y){
 		lightMap = new short[x][y];
@@ -26,11 +27,15 @@ public class Light {
 			}
 		}
 		calculateDarkness();
+		for(LightSource ls : lightSources)
+			calculateLight(ls.x, ls.y, ls.lightLevel);
 		lightFilter = generateLightFilter();
+	}
+	public static void addLightSource(int x,int y,int lightLevel){
+		lightSources.add(new LightSource(x, y, lightLevel));
 	}
 	public static void calculateDarkness(){
 		for(Rectangle dark : darkAreas){
-			System.out.println(dark);
 			for(int x = (int) dark.getMinX();x < dark.getMaxX();x++){
 				for(int y  = (int)dark.getMinY();y < dark.getMaxY();y++){
 					if(x > totalLightMap.length - 1)continue;
