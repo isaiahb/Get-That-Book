@@ -80,6 +80,7 @@ public class Light {
 					totalLightMap[i][j] += lightMap[i][j];
 				else
 					totalLightMap[i][j] = 511;
+				lightMap[i][j] = 0;
 
 			}
 		}
