@@ -45,15 +45,6 @@ public class Light {
 			}
 		}
 	}
-	public static Body collidedHitbox(int x,int y,int width,int height){
-		Body c = null;
-		for(GameObject b : Scene.currentScene.objects){
-			if(b.body.position.x > x + width || b.body.position.x + b.body.size.x < x);
-			else if(b.body.position.y > y + height || b.body.position.y + b.body.size.y < y);
-			else if(c == null || b.body.position.y < c.position.y)c = b.body;
-		}
-		return c;
-	}
 	public static void calculateLight(int x,int y,short lightLevel){
 		boolean[][] done = new boolean[lightMap.length][lightMap[0].length];
 		recursiveRay(x,y,lightLevel,1,0,done);
