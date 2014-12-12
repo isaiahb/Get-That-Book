@@ -8,6 +8,7 @@ import com.wicgames.gameObjects.GameObject;
 import com.wicgames.gameObjects.LevelEnd;
 import com.wicgames.gameObjects.PushPlatform;
 import com.wicgames.gameObjects.Scenery;
+import com.wicgames.mobs.BasicTribeMember;
 import com.wicgames.physics.Material;
 import com.wicgames.physics.Rectangle;
 import com.wicgames.wicLibrary.SpriteSheet;
@@ -84,5 +85,6 @@ public class LevelLoader {
 			e.printStackTrace();
 		}
 		Light.generateLightMap((int)currentLevel.size.x,(int)currentLevel.size.y);
+		new BasicTribeMember(50,100);
 	}
 }

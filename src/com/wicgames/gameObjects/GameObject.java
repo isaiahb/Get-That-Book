@@ -9,7 +9,7 @@ import com.wicgames.physics.Body;
 import com.wicgames.wicLibrary.Drawable;
 import com.wicgames.wicLibrary.Vector2;
 import com.wicgames.window.Scene;
-
+import com.wicgames.game.LevelScene;
 public abstract class GameObject implements Drawable {
 	public static int tileSize = Main.TILESIZE;	//Creates a global variable in all game objects with the tile size
 	public Body body;		//Holds the body, which handles the physics
@@ -19,6 +19,7 @@ public abstract class GameObject implements Drawable {
 		Scene.currentScene.objects.add(object);
 		Scene.currentScene.bodies.add(object.body);
 		Scene.currentScene.drawables.add(object);
+		((LevelScene)Scene.currentScene).gravity.add(object.body);
 	}
 	
 	public void draw(Graphics2D graphics2D) {
