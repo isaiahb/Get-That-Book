@@ -23,7 +23,7 @@ public class Light {
 		for (int i = 0; i < lightMap.length; i++) {
 			for (int j = 0; j < lightMap[i].length; j++) {
 				lightMap[i][j] = 0;
-				totalLightMap[i][j] = 255;
+				totalLightMap[i][j] = 511;
 			}
 		}
 		calculateDarkness();
@@ -76,10 +76,10 @@ public class Light {
 		}
 		for (int i = 0; i < lightMap.length; i++) {
 			for (int j = 0; j < lightMap[i].length; j++) {
-				if((int)totalLightMap[i][j] + (int)lightMap[i][j] <= 255)
+				if((int)totalLightMap[i][j] + (int)lightMap[i][j] <= 511)
 					totalLightMap[i][j] += lightMap[i][j];
 				else
-					totalLightMap[i][j] = 255;
+					totalLightMap[i][j] = 511;
 
 			}
 		}
@@ -97,7 +97,7 @@ public class Light {
 		BufferedImage filter = new BufferedImage(totalLightMap.length, totalLightMap[0].length, BufferedImage.TYPE_4BYTE_ABGR);
 		for (int i = 0; i < totalLightMap.length; i++) {
 			for (int j = 0; j < totalLightMap[i].length; j++) {
-				filter.setRGB(i , j, new Color(0,0,0,255 - (totalLightMap[i][j])).getRGB());
+				filter.setRGB(i , j, new Color(0,0,0,255 - (totalLightMap[i][j]) / 2).getRGB());
 			}
 		}
 		return filter;
