@@ -63,7 +63,7 @@ public class LevelLoader {
 					new PushPlatform(Integer.parseInt(objectInfo[1]), Integer.parseInt(objectInfo[2]), Integer.parseInt(objectInfo[3]), Integer.parseInt(objectInfo[4]), currentLevel.textures.getImage(Integer.parseInt(objectInfo[5])));
 					break;
 				case 2: //Light
-					Light.addLightSource(Integer.parseInt(objectInfo[1]), Integer.parseInt(objectInfo[2]), Short.parseShort(objectInfo[5]));
+					Light.lightSources.add(new LightSource(Integer.parseInt(objectInfo[1]), Integer.parseInt(objectInfo[2]), Short.parseShort(objectInfo[5])));
 					break;
 				}
 			}
@@ -80,14 +80,14 @@ public class LevelLoader {
 			while(darknessReader.ready()){
 				String[] rectangle = darknessReader.readLine().split(" ");
 				java.awt.Rectangle darkness = new java.awt.Rectangle(Integer.parseInt(rectangle[0]) * GameObject.tileSize,Integer.parseInt(rectangle[1]) * GameObject.tileSize,Integer.parseInt(rectangle[2]) * GameObject.tileSize,Integer.parseInt(rectangle[3]) * GameObject.tileSize);
-				Light.darkAreas.add(darkness);
 			}
 			darknessReader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Light.generateLightMap((int)currentLevel.size.x,(int)currentLevel.size.y);
+		
 		new BasicTribeMember(50,100);
+		Light.refresh();
 	}
 
 }

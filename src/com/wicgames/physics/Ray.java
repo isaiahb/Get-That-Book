@@ -17,19 +17,27 @@ public class Ray {
 	Vector2 direction;		//the vector direction which the ray is casted		
 	int maxLength;			//the max distance to test whether 
 	int length;
-
+	public ArrayList<Vector2> points = new ArrayList<Vector2>();
 	public Ray(Vector2 startPosition, Vector2 direction, int length) {
 		this.startPosition = startPosition;
 		this.direction = direction;
+		this.maxLength = length;
 		calculate();
 	}
 	
 	private void calculate() {
 		direction.normalize();
 		Vector2 target = Vector2.add(startPosition, (Vector2.mul(direction, maxLength)));
-		int testLength = isObsticle(startPosition, target, staticPixels);
+		int testLength = isObsticle(startPosition, target, staticPixels, points);
 		if (testLength == maxLength) {
-			
+			hit = false;
+			endPosition = target;
+			length = testLength;
+		}
+		else {
+			hit = true;
+			endPosition = Vector2.add(startPosition, (Vector2.mul(direction, testLength)));
+			length = testLength;
 		}
 		
 	}
@@ -59,10 +67,10 @@ public class Ray {
 		return points;
 	}
 	
-	public static int isObsticle(Vector2 a, Vector2 b, boolean[][] pixels) {
-		return isObsticle((int)a.x, (int)a.y, (int)b.x, (int)b.y, pixels);
+	public static int isObsticle(Vector2 a, Vector2 b, boolean[][] pixels, ArrayList<Vector2> points) {
+		return isObsticle((int)a.x, (int)a.y, (int)b.x, (int)b.y, pixels, points);
 	}
-	public static int isObsticle(int x, int y, int x2, int y2, boolean[][] pixels) {
+	public static int isObsticle(int x, int y, int x2, int y2, boolean[][] pixels,ArrayList<Vector2> points) {
 		int dx = Math.abs(x2-x);	//total change in x position
 		int dy = Math.abs(y2-y);	//total change in y position
 		int sx = x < x2 ? 1 : -1;	//direction to change x by
@@ -72,6 +80,8 @@ public class Ray {
 		int startY = y;
 		
 		while (true) {
+			points.add(new Vector2(x, y));
+			if (x < 0 || y < 0) return (int) Math.sqrt((x - startX) * (x - startX) + (y - startY) * (y - startY));
 			if (pixels[x][y] == true) {
 				return (int) Math.sqrt((x - startX) * (x - startX) + (y - startY) * (y - startY));
 			}			

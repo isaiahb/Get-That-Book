@@ -2,10 +2,11 @@ package com.wicgames.game;
 
 public class LightSource{
 	public int x,y;
-	public short lightLevel;
-	public LightSource(int x,int y,int lightLevel){
+	public short intensity;
+	
+	public LightSource(int x,int y,int intensity){
 		this.x = x;
 		this.y = y;
-		this.lightLevel = (short) lightLevel;
+		this.intensity = (short) intensity;
 	}
 }
