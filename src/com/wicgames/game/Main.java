@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import com.wicgames.input.Key;
+import com.wicgames.input.Mouse;
 import com.wicgames.physics.Ray;
 import com.wicgames.wicLibrary.Function;
 import com.wicgames.wicLibrary.Vector2;
@@ -33,6 +34,7 @@ public class Main {
 		panel = new Panel(frame);
 		Scene.currentScene = new SplashScreen();	//Sets the current Scene to the splash screen
 		Key.init();		//Initializes Key Class
+		Mouse.init();
 		Key.typed.connect(new Function(){
 			public <T>void call(T c) {
 				if ((char)c == 'p') {

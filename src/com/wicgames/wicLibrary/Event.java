@@ -12,6 +12,19 @@ public class Event {
 		for (int i = 0; i < functions.size(); i++) 
 			 functions.get(i).call(t);
 	}	
+	public <T> void trigger(T a, T b) {
+		for (int i = 0; i < functions.size(); i++) 
+			 functions.get(i).call(a, b);
+	}
+	public <T> void trigger(T a, T b, T c) {
+		for (int i = 0; i < functions.size(); i++) 
+			 functions.get(i).call(a, b, c);
+	}
+	public <T> void trigger(T a, T b, T c, T d) {
+		for (int i = 0; i < functions.size(); i++) 
+			 functions.get(i).call(a, b, c, d);
+	}
+	
 	public void connect(Function function) {
 		functions.add(function);
 	}

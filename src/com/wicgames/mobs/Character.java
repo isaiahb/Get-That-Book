@@ -7,7 +7,10 @@ import java.awt.image.BufferedImage;
 import com.sun.javafx.Utils;
 import com.wicgames.game.Data;
 import com.wicgames.game.Main;
+import com.wicgames.gameObjects.Projectile;
+import com.wicgames.gameObjects.Rock;
 import com.wicgames.input.Key;
+import com.wicgames.input.Mouse;
 import com.wicgames.physics.Body;
 import com.wicgames.physics.Force;
 import com.wicgames.physics.Material;
@@ -22,6 +25,7 @@ import com.wicgames.window.Scene;
 public class Character extends Mob {
 	public static SpriteSheet walkingSheet, idleSheet, fallingSheet, jumpingSheet;
 	public static Class hitbox;
+	private boolean direction;
 	public void respawn(double x, double y) {
 		body.position.setTo(x, y + body.size.y/Main.scale);
 		health = 1;
@@ -59,6 +63,7 @@ public class Character extends Mob {
 		Key.pressed[Integer.parseInt(Data.config.getValue("Move Right"))].connect(new Function() {
 			public void call() {
 				right = true;
+				direction = false;
 				if(!moveRight.bodies.contains(body))
 					moveRight.add(body);
 			}
@@ -66,6 +71,7 @@ public class Character extends Mob {
 		Key.pressed[Integer.parseInt(Data.config.getValue("Move Left"))].connect(new Function() {
 			public void call() {
 				left = true;
+				direction = true;
 				if(!moveLeft.bodies.contains(body))
 					moveLeft.add(body);
 			}
@@ -86,6 +92,12 @@ public class Character extends Mob {
 			public void call() {
 				jumpRequest = true;
 				jumpCall = 0;
+			}
+		});
+		Mouse.button1.released.connect(new Function(){
+			@Override
+			public void call() {
+				new Rock(Vector2.sub(Mouse.position,body.position),1000,body.position);
 			}
 		});
 		texture = walkingSheet.getImage(0);
@@ -127,7 +139,7 @@ public class Character extends Mob {
 		offset.y = body.position.y < sceneSize.y - mid.y ? offset.y : sceneSize.y - mid.y * 2;
 		Vector2 p = Vector2.sub(body.position, offset);
 		BufferedImage flipTexture = ImageMethods.copyImage((BufferedImage)texture);
-		if(left)
+		if(direction)
 			ImageMethods.flipImage((BufferedImage) flipTexture);
 		if (flipTexture != null)
 			graphics2d.drawImage(flipTexture,(int)p.x,(int)p.y,null);
