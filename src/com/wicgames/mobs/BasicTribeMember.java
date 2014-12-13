@@ -20,8 +20,8 @@ public class BasicTribeMember extends Mob{
         	@Override
         	public void update(double delta) {
         		super.update(delta);
-				velocity.x = Math.copySign(Math.max(Math.abs(velocity.x) -10,0), velocity.x);
-				velocity.x = Utils.clamp(-100,velocity.x,100);
+				velocity.x = Math.copySign(Math.max(Math.abs(velocity.x) -12,0), velocity.x);
+				velocity.x = Utils.clamp(-30,velocity.x,30);
         		BasicTribeMember.this.update(delta);
         	}
         };

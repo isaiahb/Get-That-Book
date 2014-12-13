@@ -146,7 +146,7 @@ public class Character extends Mob {
 			jumpRequest = false;
 		}
 		if(jumpRequest && onTopAny()){
-			body.velocity.y += -400;
+			body.velocity.y += -800;
 			jumping.start();
 			jumpRequest = false;
 		}
